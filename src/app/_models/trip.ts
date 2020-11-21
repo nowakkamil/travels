@@ -1,6 +1,9 @@
 import { Trip as TripInterface } from '../_types/trip';
 
 class Trip implements TripInterface {
+  static lastId = 0;
+  rating: number;
+
   id: number;
   name: string;
   price: number;
@@ -12,8 +15,29 @@ class Trip implements TripInterface {
   maxPeopleCount: number;
   photoUrl: string;
 
+  static fromInterface(data: TripInterface): Trip {
+    const trip = new Trip(Trip.lastId + 1);
+
+    trip.description = data.description;
+    trip.destination = data.destination;
+    trip.endDate = data.endDate;
+    trip.maxPeopleCount = data.maxPeopleCount;
+    trip.name = data.name;
+    trip.photoUrl = data.photoUrl;
+    trip.price = data.price;
+    trip.rating = data.rating;
+    trip.startDate = data.startDate;
+
+    return trip;
+  }
+
   constructor(id: number) {
     this.id = id;
+
+    if (id > Trip.lastId) {
+      Trip.lastId = id;
+    }
+
     this.description = `Finest trip description (${id})`;
     this.destination = `Country #${id}`;
     this.name = `Name: '${id}'`;

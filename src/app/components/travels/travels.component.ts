@@ -1,23 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { Trip } from '../_models/trip';
+import { Trip } from '../../_models/trip';
+import { TravelsService } from '../../services/travels.service';
+import { ShoppingCartService } from '../../services/shopping-cart.service';
 
 @Component({
   selector: 'app-travels',
   templateUrl: './travels.component.html',
   styleUrls: ['./travels.component.scss']
 })
-export class TravelsComponent {
-  trips: Array<Trip> = [
-    new Trip(1),
-    new Trip(2),
-    new Trip(3),
-    new Trip(4),
-    new Trip(5),
-    new Trip(6),
-    new Trip(7),
-    new Trip(8),
-  ];
+export class TravelsComponent implements OnInit {
+  trips: Array<Trip> = [];
+
+  constructor(
+    private travelsService: TravelsService,
+    private shoppingCartService: ShoppingCartService) { }
+
+  ngOnInit(): void {
+    this.loadTrips();
+  }
+
+  loadTrips(): void {
+    this.trips = this.travelsService.getAll();
+  }
 
   get bookedTripsCount(): number {
     return this.trips.reduce(this.accumulateTripsCount, 0);
