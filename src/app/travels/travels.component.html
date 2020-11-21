@@ -1,0 +1,44 @@
+<mat-card [ngClass]="{ 'booked-count--high': bookedTripsCount >= 10, 'booked-count--low': bookedTripsCount < 10 }">
+  <mat-card-header>
+    <mat-card-title>Booked trips: {{ bookedTripsCount }}</mat-card-title>
+  </mat-card-header>
+</mat-card>
+
+<mat-grid-list cols="4" rowHeight="300px">
+  <mat-grid-tile *ngFor="let trip of trips">
+    <mat-card
+      [ngClass]="{ 'trip-price--lowest': trip.id === minPriceId, 'trip-price--highest': trip.id === maxPriceId }"
+      [ngStyle]="{ 'padding': '1.3rem' }">
+      <mat-card-header>
+        <img class="image" mat-card-avatar [src]="trip.photoUrl">
+        <mat-card-title>{{ trip.name | uppercase }}</mat-card-title>
+        <mat-card-subtitle>{{ trip.destination | uppercase }}</mat-card-subtitle>
+        <mat-card-subtitle>{{ trip.startDateFormatted }} - {{ trip.endDateFormatted }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ trip.description }}</p>
+        <p>Price: ${{ trip.price }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <div>
+          <span *ngIf="trip.lowAvailability && !trip.isFull" style="color: red">Last vacancies!</span>
+          <br>
+          <ng-template [ngIf]="!trip.isFull" [ngIfElse]="noVacancies">
+            <strong>Booking status: </strong>{{ trip.currentPeopleCount }}/{{ trip.maxPeopleCount }}
+          </ng-template>
+          <ng-template #noVacancies>
+            <strong>All sold</strong>
+          </ng-template>
+        </div>
+        <button class="button plus-sign" [ngStyle]="{ 'visibility': trip.isFull ? 'hidden' : 'visible' }"
+          (click)="trip.reserve()">
+          ADD
+        </button>
+        <button class="button minus-sign" [ngStyle]="{ 'visibility': trip.isEmpty ? 'hidden' : 'visible' }"
+          (click)="trip.undoReserve()">
+          REMOVE
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
