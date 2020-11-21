@@ -13,6 +13,19 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
 
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { IconsProviderModule } from './icons-provider.module';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_GB } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+
+registerLocaleData(en);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,13 +36,19 @@ import { MatBadgeModule } from '@angular/material/badge';
     AppRoutingModule,
     BrowserAnimationsModule,
 
+    NzButtonModule,
     MatButtonModule,
     MatCardModule,
     MatGridListModule,
     MatIconModule,
-    MatBadgeModule
+    MatBadgeModule,
+    IconsProviderModule,
+    NzLayoutModule,
+    NzMenuModule,
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [{ provide: NZ_I18N, useValue: en_GB }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

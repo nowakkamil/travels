@@ -30,12 +30,13 @@
             <strong>All sold</strong>
           </ng-template>
         </div>
-        <button class="button plus-sign" [ngStyle]="{ 'visibility': trip.isFull ? 'hidden' : 'visible' }"
-          (click)="trip.reserve()">
+        <button nz-button nzType="primary" [attr.disabled]="trip.isFull ? '' : null" (click)="trip.reserve()">
+          <i nz-icon nzType="plus" nzTheme="outline"></i>
           ADD
         </button>
-        <button class="button minus-sign" [ngStyle]="{ 'visibility': trip.isEmpty ? 'hidden' : 'visible' }"
+        <button nz-button nzType="primary" disabled [attr.disabled]="trip.isEmpty ? '' : null"
           (click)="trip.undoReserve()">
+          <i nz-icon nzType="minus" nzTheme="outline"></i>
           REMOVE
         </button>
       </mat-card-actions>
