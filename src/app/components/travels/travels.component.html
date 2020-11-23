@@ -1,3 +1,8 @@
+<div>
+  <app-trip-creation (saved)="onTripSaved($event)"></app-trip-creation>
+  <app-shopping-cart></app-shopping-cart>
+</div>
+
 <mat-card [ngClass]="{ 'booked-count--high': bookedTripsCount >= 10, 'booked-count--low': bookedTripsCount < 10 }">
   <mat-card-header>
     <mat-card-title>Booked trips: {{ bookedTripsCount }}</mat-card-title>
@@ -6,12 +11,8 @@
 
 <mat-grid-list cols="4" rowHeight="300px">
   <mat-grid-tile *ngFor="let trip of trips">
-    <app-trip [isHighest]="trip.id === minPriceId"
-              [isLowest]="trip.id === maxPriceId"
-              [trip]="trip"
-              (rated)="onTripRated($event)"
-              (removed)="onTripRemoved($event)"
-              (reserved)="onTripReserved($event)"
-              (unreserved)="onTripUnreserved($event)"></app-trip>
+    <app-trip [isHighest]="trip.id === minPriceId" [isLowest]="trip.id === maxPriceId" [trip]="trip"
+      (rated)="onTripRated($event)" (removed)="onTripRemoved($event)" (reserved)="onTripReserved($event)"
+      (unreserved)="onTripUnreserved($event)"></app-trip>
   </mat-grid-tile>
 </mat-grid-list>

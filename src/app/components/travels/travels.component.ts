@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Trip } from '../../_models/trip';
+import { Trip, TripInterface } from '../../_models/trip';
 import { TravelsService } from '../../services/travels.service';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 
@@ -67,5 +67,9 @@ export class TravelsComponent implements OnInit {
 
   onTripRemoved(id: number): void {
     this.trips = this.trips.filter(trip => trip.id !== id);
+  }
+
+  onTripSaved(data: TripInterface): void {
+    this.travelsService.create(data);
   }
 }

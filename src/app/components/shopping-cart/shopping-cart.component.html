@@ -1,1 +1,13 @@
-<p>shopping-cart works!</p>
+<div>
+  <h4>Selected trips</h4>
+  <div>
+    <ul>
+      <li *ngFor="let data of trips">
+        {{ data.trip.name }} - {{ data.count }}
+      </li>
+    </ul>
+  </div>
+  <div>
+    Price summary: {{ priceSummary | currency:'$' }}
+  </div>
+</div>

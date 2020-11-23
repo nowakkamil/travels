@@ -17,7 +17,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_GB } from 'ng-zorro-antd/i18n';
@@ -26,6 +26,7 @@ import en from '@angular/common/locales/en';
 import { TripComponent } from './components/trip/trip.component';
 import { TripRatingComponent } from './components/trip-rating/trip-rating.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { TripCreationComponent } from './components/trip-creation/trip-creation.component';
 
 registerLocaleData(en);
 
@@ -35,7 +36,8 @@ registerLocaleData(en);
     TravelsComponent,
     TripComponent,
     TripRatingComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    TripCreationComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,9 @@ registerLocaleData(en);
     NzLayoutModule,
     NzMenuModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_GB }],
   bootstrap: [AppComponent]

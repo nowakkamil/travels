@@ -22,11 +22,12 @@
       </ng-template>
     </div>
     <app-trip-rating [rating]="trip.rating" (rated)="onTripRated($event)"></app-trip-rating>
-    <button nz-button nzType="primary" [attr.disabled]="trip.isFull ? '' : null" (click)="trip.reserve()">
+    <button nz-button nzType="primary" [attr.disabled]="trip.isFull ? '' : null" (click)="onReserveButtonClicked()">
       <i nz-icon nzType="plus" nzTheme="outline"></i>
       ADD
     </button>
-    <button nz-button nzType="primary" disabled [attr.disabled]="trip.isEmpty ? '' : null" (click)="trip.undoReserve()">
+    <button nz-button nzType="primary" disabled [attr.disabled]="trip.isEmpty ? '' : null"
+      (click)="onUndoReserveButtonClicked()">
       <i nz-icon nzType="minus" nzTheme="outline"></i>
       REMOVE
     </button>
