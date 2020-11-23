@@ -23,13 +23,19 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_GB } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
+import { TripComponent } from './components/trip/trip.component';
+import { TripRatingComponent } from './components/trip-rating/trip-rating.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
-    TravelsComponent
+    TravelsComponent,
+    TripComponent,
+    TripRatingComponent,
+    ShoppingCartComponent
   ],
   imports: [
     BrowserModule,

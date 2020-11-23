@@ -51,4 +51,21 @@ export class TravelsComponent implements OnInit {
       ? x
       : y;
   }
+
+  onTripReserved(id: number): void {
+    this.shoppingCartService.select(this.trips.find(trip => trip.id === id));
+  }
+
+  onTripUnreserved(id: number): void {
+    this.shoppingCartService.unselect(this.trips.find(trip => trip.id === id));
+  }
+
+  onTripRated(data: { id: number, rating: number }): void {
+    const entry = this.trips.find(trip => trip.id === data.id);
+    entry?.setRating(data.rating);
+  }
+
+  onTripRemoved(id: number): void {
+    this.trips = this.trips.filter(trip => trip.id !== id);
+  }
 }

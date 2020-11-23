@@ -72,6 +72,10 @@ class Trip implements TripInterface {
     return this.endDate.toDateString();
   }
 
+  setRating(rating: number): void {
+    this.rating = rating;
+  }
+
   reserve(): void {
     if (this.currentPeopleCount >= this.maxPeopleCount) {
       return;

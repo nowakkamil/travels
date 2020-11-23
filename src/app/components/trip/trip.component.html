@@ -1,0 +1,40 @@
+<mat-card [ngClass]="{ 'trip-price--lowest': isLowest, 'trip-price--highest': isHighest }"
+  [ngStyle]="{ 'padding': '1.3rem' }">
+  <mat-card-header>
+    <img class="image" mat-card-avatar [src]="trip.photoUrl">
+    <mat-card-title>{{ trip.name | uppercase }}</mat-card-title>
+    <mat-card-subtitle>{{ trip.destination | uppercase }}</mat-card-subtitle>
+    <mat-card-subtitle>{{ trip.startDateFormatted }} - {{ trip.endDateFormatted }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ trip.description }}</p>
+    <p>Price: ${{ trip.price }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <div>
+      <span *ngIf="trip.lowAvailability && !trip.isFull" style="color: red">Last vacancies!</span>
+      <br>
+      <ng-template [ngIf]="!trip.isFull" [ngIfElse]="noVacancies">
+        <strong>Booking status: </strong>{{ trip.currentPeopleCount }}/{{ trip.maxPeopleCount }}
+      </ng-template>
+      <ng-template #noVacancies>
+        <strong>All sold</strong>
+      </ng-template>
+    </div>
+    <app-trip-rating [rating]="trip.rating" (rated)="onTripRated($event)"></app-trip-rating>
+    <button nz-button nzType="primary" [attr.disabled]="trip.isFull ? '' : null" (click)="trip.reserve()">
+      <i nz-icon nzType="plus" nzTheme="outline"></i>
+      ADD
+    </button>
+    <button nz-button nzType="primary" disabled [attr.disabled]="trip.isEmpty ? '' : null" (click)="trip.undoReserve()">
+      <i nz-icon nzType="minus" nzTheme="outline"></i>
+      REMOVE
+    </button>
+    <button (click)="onRemoveButtonClicked()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path
+          d="M9 19c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5-17v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.315c0 .901.73 2 1.631 2h5.712zm-3 4v16h-14v-16h-2v18h18v-18h-2z" />
+      </svg>
+    </button>
+  </mat-card-actions>
+</mat-card>
