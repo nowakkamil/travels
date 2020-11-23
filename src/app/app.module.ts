@@ -12,6 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
+import { NzFormModule } from 'ng-zorro-antd/form';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { IconsProviderModule } from './icons-provider.module';
@@ -54,6 +55,7 @@ registerLocaleData(en);
     NzLayoutModule,
     NzMenuModule,
     FormsModule,
+    NzFormModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule

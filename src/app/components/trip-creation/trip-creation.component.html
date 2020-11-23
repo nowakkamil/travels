@@ -1,41 +1,46 @@
-<div>
+<div class="main">
   <h3>New trip creation</h3>
   <div>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input class="form-control" id="name" type="text" formControlName="name">
-      </div>
+    <form nz-form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <nz-form-item>
+        <nz-form-label nz-for="name">Name</nz-form-label>
+        <input nz-input id="name" type="text" formControlName="name">
+      </nz-form-item>
 
-      <div class="form-group">
-        <label for="destination">Destination</label>
-        <input class="form-control" id="destination" type="text" formControlName="destination">
-      </div>
+      <nz-form-item>
+        <nz-form-label nz-for="destination">Destination</nz-form-label>
+        <input nz-input id="destination" type="text" formControlName="destination">
+      </nz-form-item>
 
-      <div class="form-group">
-        <label for="start_date">Start date</label>
-        <input class="form-control" id="start_date" type="date" formControlName="startDate">
-      </div>
+      <nz-form-item>
+        <nz-form-label nz-for="start_date">Start date</nz-form-label>
+        <input nz-input id="start_date" type="date" formControlName="startDate">
+      </nz-form-item>
 
-      <div class="form-group">
-        <label for="end_date">End date</label>
-        <input class="form-control" id="end_date" type="date" formControlName="endDate">
-      </div>
+      <nz-form-item>
+        <nz-form-label nz-for="end_date">End date</nz-form-label>
+        <input nz-input id="end_date" type="date" formControlName="endDate">
+      </nz-form-item>
 
-      <div class="form-group">
-        <label for="max_people_count">Max people count</label>
-        <input class="form-control" id="max_people_count" type="number" formControlName="maxPeopleCount">
-      </div>
+      <nz-form-item>
+        <nz-form-label nz-for="max_people_count">Max people count</nz-form-label>
+        <input nz-input id="max_people_count" type="number" formControlName="maxPeopleCount">
+      </nz-form-item>
 
-      <div class="form-group">
-        <label for="description">Description</label>
-        <textarea class="form-control" id="description" formControlName="description"></textarea>
-      </div>
+      <nz-form-item>
+        <nz-form-label nz-for="description">Description</nz-form-label>
+        <textarea id="description" formControlName="description"></textarea>
+      </nz-form-item>
 
-      <div class="form-group">
-        <label for="photo_url">Photo url</label>
-        <input class="form-control" id="photo_url" type="url" formControlName="photoUrl">
-      </div>
+      <nz-form-item>
+        <nz-form-label nz-for="photo_url">Photo url</nz-form-label>
+        <input nz-input id="photo_url" type="url" formControlName="photoUrl">
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nz-for="price">Price in $</nz-form-label>
+        <input nz-input id="price" type="number" formControlName="price">
+      </nz-form-item>
 
       <button>
         Save
