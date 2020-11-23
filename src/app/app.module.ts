@@ -19,6 +19,7 @@ import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NzRateModule } from 'ng-zorro-antd/rate';
 import { HttpClientModule } from '@angular/common/http';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_GB } from 'ng-zorro-antd/i18n';
@@ -56,6 +57,8 @@ registerLocaleData(en);
     NzMenuModule,
     FormsModule,
     NzFormModule,
+    FormsModule,
+    NzRateModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule
