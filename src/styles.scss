@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import '~normalize.css';
+@import "~ng-zorro-antd/ng-zorro-antd.min.css";
+
 .button {
   margin: 5px;
   padding: 10px;
@@ -21,4 +25,8 @@
   &.minus-sign::before {
     content: "\2212";
   }
+}
+
+[nz-form] {
+  max-width: 600px;
 }
