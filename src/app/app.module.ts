@@ -20,6 +20,10 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzRateModule } from 'ng-zorro-antd/rate';
+import { NzSliderModule } from 'ng-zorro-antd/slider';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzInputModule } from 'ng-zorro-antd/input';
 import { HttpClientModule } from '@angular/common/http';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_GB } from 'ng-zorro-antd/i18n';
@@ -29,6 +33,7 @@ import { TripComponent } from './components/trip/trip.component';
 import { TripRatingComponent } from './components/trip-rating/trip-rating.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { TripCreationComponent } from './components/trip-creation/trip-creation.component';
+import { FilterComponent } from './components/filter/filter.component';
 
 registerLocaleData(en);
 
@@ -39,7 +44,8 @@ registerLocaleData(en);
     TripComponent,
     TripRatingComponent,
     ShoppingCartComponent,
-    TripCreationComponent
+    TripCreationComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
@@ -55,13 +61,15 @@ registerLocaleData(en);
     IconsProviderModule,
     NzLayoutModule,
     NzMenuModule,
-    FormsModule,
     NzFormModule,
-    FormsModule,
     NzRateModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NzSliderModule,
+    NzDatePickerModule,
+    NzInputModule,
+    NzInputNumberModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_GB }],
   bootstrap: [AppComponent]

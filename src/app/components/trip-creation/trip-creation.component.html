@@ -13,28 +13,28 @@
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-label nz-for="start_date">Start date</nz-form-label>
-        <input nz-input id="start_date" type="date" formControlName="startDate">
+        <nz-form-label nz-for="startDate">Start date</nz-form-label>
+        <nz-date-picker formControlName="startDate"></nz-date-picker>
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-label nz-for="end_date">End date</nz-form-label>
-        <input nz-input id="end_date" type="date" formControlName="endDate">
+        <nz-form-label nz-for="endDate">End date</nz-form-label>
+        <nz-date-picker formControlName="endDate"></nz-date-picker>
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-label nz-for="max_people_count">Max people count</nz-form-label>
-        <input nz-input id="max_people_count" type="number" formControlName="maxPeopleCount">
+        <nz-form-label nz-for="maxPeopleCount">Max people count</nz-form-label>
+        <nz-input-number [(ngModel)]="maxPeopleCount" [nzMin]="1" [nzStep]="1"></nz-input-number>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-label nz-for="description">Description</nz-form-label>
-        <textarea id="description" formControlName="description"></textarea>
+        <textarea rows="4" nz-input [(ngModel)]="description"></textarea>
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-label nz-for="photo_url">Photo url</nz-form-label>
-        <input nz-input id="photo_url" type="url" formControlName="photoUrl">
+        <nz-form-label nz-for="photoUrl">Photo URL</nz-form-label>
+        <input nz-input id="photoUrl" type="url" formControlName="photoUrl">
       </nz-form-item>
 
       <nz-form-item>
