@@ -1,0 +1,48 @@
+.filter {
+  display: flex;
+  flex-direction: column;
+  max-width: 30%;
+  padding: 1.5%;
+
+  & > * {
+    margin: 1.5% 0;
+  }
+
+  & .price,
+  & .date,
+  & .rating {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  & .price {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+
+    & span {
+      flex-grow: 1;
+      height: 3em;
+      line-height: 3em;
+      white-space: nowrap;
+    }
+
+    & nz-slider {
+      flex-grow: 20;
+    }
+  }
+
+  & .date nz-date-picker {
+    width: 48%;
+  }
+
+  & .rating {
+    margin: 0;
+
+    & span {
+      height: 3em;
+      line-height: 3em;
+      white-space: nowrap;
+    }
+  }
+}
