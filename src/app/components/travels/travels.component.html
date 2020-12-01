@@ -3,14 +3,14 @@
   <app-shopping-cart></app-shopping-cart>
 </div>
 
-<app-filter></app-filter>
-
 <mat-card [ngClass]="{ 'booked-count--high': bookedTripsCount >= 10, 'booked-count--low': bookedTripsCount < 10 }"
   [ngStyle]="{'font-size': '1.4em'}">
   <mat-card-header>
     <mat-card-title>Booked trips: {{ bookedTripsCount }}</mat-card-title>
   </mat-card-header>
 </mat-card>
+
+<app-filter></app-filter>
 
 <mat-grid-list cols="4" rowHeight="300px">
   <mat-grid-tile *ngFor="let trip of trips">

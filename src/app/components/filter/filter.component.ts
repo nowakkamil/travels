@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NzMarks } from 'ng-zorro-antd/slider';
 import { NzDatePickerComponent } from 'ng-zorro-antd/date-picker';
+import { TravelsService } from 'src/app/services/travels.service';
 
 @Component({
   selector: 'app-filter',
@@ -11,23 +12,29 @@ export class FilterComponent {
 
   @ViewChild('endDatePicker') endDatePicker!: NzDatePickerComponent;
 
+  minimumPrice: number;
+  maximumPrice: number;
+  prices: NzMarks;
+
+  startDate: Date;
+  endDate: Date;
+
   minimumRating: number;
   maximumRating: number;
 
-  startDate: Date | null = null;
-  endDate: Date | null = null;
-
   destination: string;
 
-  minimumPrice: 0;
-  maximumPrice: 10000;
-  startMark: number;
-  endMark: number;
+  constructor(
+    private travelsService: TravelsService
+  ) {
+    this.minimumPrice = 1;
+    this.maximumPrice = 10000;
 
-  marks: NzMarks = {
-    1: '1$',
-    10000: '10000$'
-  };
+    this.prices = {
+      1: '1$',
+      10000: '10000$'
+    };
+  }
 
   disabledStartDate = (startDate: Date): boolean => {
     if (!startDate || !this.endDate) {
@@ -60,6 +67,27 @@ export class FilterComponent {
 
   setMaximumRating(maximumRating: number): void {
     this.maximumRating = maximumRating;
+  }
+
+  setPrice(modelChange: number[]): void {
+    if (!Array.isArray(modelChange)) {
+      console.error(`Setting price can not succeed if array of NzMarks is not passed. Received: ${modelChange}`);
+      return;
+    }
+
+    this.minimumPrice = modelChange[0];
+    this.maximumPrice = modelChange[1];
+  }
+
+  filterTravels(): void {
+    if (Array.isArray(this.minimumPrice)) {
+      console.log(this.minimumPrice[0]);
+      this.travelsService.filter(this.minimumPrice[0]);
+      return;
+    }
+
+    console.log(this.minimumPrice);
+    this.travelsService.filter(this.minimumPrice);
   }
 
 }

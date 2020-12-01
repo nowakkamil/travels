@@ -1,7 +1,8 @@
 <div class="filter">
   <div class="price">
     <span>Price: </span>
-    <nz-slider [nzMarks]="marks" nzIncluded nzRange [ngModel]="[startMark, endMark]" [nzMin]="1" [nzMax]="10000">
+    <nz-slider [nzMarks]="prices" nzIncluded nzRange [ngModel]="[minimumPrice, maximumPrice]" [nzMin]="1" [nzMax]="10000"
+      (ngModelChange)="setPrice($event)">
     </nz-slider>
   </div>
 
@@ -26,7 +27,7 @@
     <i nz-icon nzType="node-index" nzTheme="outline"></i>
   </ng-template>
 
-  <button nz-button nzType="primary">
+  <button nz-button nzType="primary" (click)="filterTravels()">
     <i nz-icon nzType="filter" nzTheme="outline"></i>
     Filter
   </button>

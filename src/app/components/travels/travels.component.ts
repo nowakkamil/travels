@@ -18,6 +18,7 @@ export class TravelsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadTrips();
+    this.travelsService.filterChange.subscribe(trips => this.trips = trips);
   }
 
   loadTrips(): void {
@@ -72,4 +73,5 @@ export class TravelsComponent implements OnInit {
   onTripSaved(data: TripInterface): void {
     this.travelsService.create(data);
   }
+
 }
