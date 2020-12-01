@@ -54,6 +54,8 @@ class Trip implements TripInterface {
     this.maxPeopleCount = id;
     this.currentPeopleCount = 0;
 
+    this.rating = (id % 5) + 1;
+
     this.price = 1000 + id * 100 + 99;
   }
 

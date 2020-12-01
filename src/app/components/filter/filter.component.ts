@@ -2,13 +2,14 @@ import { Component, ViewChild } from '@angular/core';
 import { NzMarks } from 'ng-zorro-antd/slider';
 import { NzDatePickerComponent } from 'ng-zorro-antd/date-picker';
 import { TravelsService } from 'src/app/services/travels.service';
+import { Filter as FilterInterface } from 'src/app/_types/filter';
 
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss']
 })
-export class FilterComponent {
+export class FilterComponent implements FilterInterface {
 
   @ViewChild('endDatePicker') endDatePicker!: NzDatePickerComponent;
 
@@ -80,14 +81,7 @@ export class FilterComponent {
   }
 
   filterTravels(): void {
-    if (Array.isArray(this.minimumPrice)) {
-      console.log(this.minimumPrice[0]);
-      this.travelsService.filter(this.minimumPrice[0]);
-      return;
-    }
-
-    console.log(this.minimumPrice);
-    this.travelsService.filter(this.minimumPrice);
+    this.travelsService.filterTravels({...this});
   }
 
 }
