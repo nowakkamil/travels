@@ -1,6 +1,38 @@
-<app-trip [trip]="trip"></app-trip>
-<nz-carousel [nzEffect]="effect">
-  <div nz-carousel-content *ngFor="let index of array">
-    <h3>{{ index }}</h3>
+<nz-descriptions nzTitle="{{trip.name}}" nzBordered>
+  <nz-descriptions-item [nzSpan]="2" nzTitle="Destination">{{trip.destination}}</nz-descriptions-item>
+  <nz-descriptions-item [nzSpan]="2" nzTitle="Price">{{trip.price}}$</nz-descriptions-item>
+  <nz-descriptions-item [nzSpan]="2" nzTitle="Description">{{trip.description}}</nz-descriptions-item>
+  <nz-descriptions-item [nzSpan]="2" nzTitle="Rating">
+    <app-trip-rating [rating]="trip.rating"></app-trip-rating>
+  </nz-descriptions-item>
+  <nz-descriptions-item [nzSpan]="2" nzTitle="Start Date">
+    <nz-date-picker nzBorderless nzFormat="yyyy-MM-dd" [(ngModel)]="trip.startDate"></nz-date-picker>
+  </nz-descriptions-item>
+  <nz-descriptions-item [nzSpan]="2" nzTitle="End Date">
+    <nz-date-picker nzBorderless nzDisabled nzFormat="yyyy-MM-dd" [(ngModel)]="trip.endDate"></nz-date-picker>
+  </nz-descriptions-item>
+</nz-descriptions>
+<nz-carousel>
+  <div nz-carousel-content *ngFor="let photoUrl of photosUrls">
+    <img alt="{{trip.description}}" [src]="photoUrl" />
   </div>
 </nz-carousel>
+<nz-comment nzAuthor="Test author" [nzDatetime]="time">
+  <nz-comment-content>
+    <p>
+      Test comment
+    </p>
+  </nz-comment-content>
+</nz-comment>
+<nz-comment>
+  <nz-comment-content>
+    <nz-form-item>
+      <textarea [(ngModel)]="inputValue" nz-input rows="4"></textarea>
+    </nz-form-item>
+    <nz-form-item>
+      <button nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!inputValue" (click)="handleSubmit()">
+        Add Comment
+      </button>
+    </nz-form-item>
+  </nz-comment-content>
+</nz-comment>

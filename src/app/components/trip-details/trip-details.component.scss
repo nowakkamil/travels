@@ -1,13 +1,9 @@
-[nz-carousel-content] {
-  text-align: center;
-  height: 160px;
-  line-height: 160px;
-  background: #364d79;
-  color: #fff;
-  overflow: hidden;
+nz-descriptions,
+nz-comment {
+  width: 60%;
 }
 
-h3 {
-  color: #fff;
-  margin-bottom: 0;
+nz-carousel {
+  width: 400px;
+  height: 400px;
 }

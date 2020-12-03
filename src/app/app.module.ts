@@ -28,6 +28,8 @@ import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import { NzCommentModule } from 'ng-zorro-antd/comment';
 import { HttpClientModule } from '@angular/common/http';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_GB } from 'ng-zorro-antd/i18n';
@@ -83,7 +85,9 @@ registerLocaleData(en);
     NzCarouselModule,
     NzCardModule,
     NzPopconfirmModule,
-    NzBadgeModule
+    NzBadgeModule,
+    NzDescriptionsModule,
+    NzCommentModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_GB }],
   bootstrap: [AppComponent]
