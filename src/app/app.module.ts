@@ -24,6 +24,10 @@ import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzCarouselModule } from 'ng-zorro-antd/carousel';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { HttpClientModule } from '@angular/common/http';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_GB } from 'ng-zorro-antd/i18n';
@@ -36,6 +40,7 @@ import { TripCreationComponent } from './components/trip-creation/trip-creation.
 import { FilterComponent } from './components/filter/filter.component';
 import { TripDetailsComponent } from './components/trip-details/trip-details.component';
 import { AuthComponent } from './components/auth/auth.component';
+import { ConfirmComponent } from './components/confirm/confirm.component';
 
 registerLocaleData(en);
 
@@ -49,7 +54,8 @@ registerLocaleData(en);
     TripCreationComponent,
     FilterComponent,
     TripDetailsComponent,
-    AuthComponent
+    AuthComponent,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +79,11 @@ registerLocaleData(en);
     NzSliderModule,
     NzDatePickerModule,
     NzInputModule,
-    NzInputNumberModule
+    NzInputNumberModule,
+    NzCarouselModule,
+    NzCardModule,
+    NzPopconfirmModule,
+    NzBadgeModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_GB }],
   bootstrap: [AppComponent]

@@ -46,7 +46,7 @@ class Trip implements TripInterface {
     this.description = `Finest trip description (${id})`;
     this.destination = `Country #${id}`;
     this.name = `Name: '${id}'`;
-    this.photoUrl = `https://picsum.photos/id/${id * 4 + 6}/200`;
+    this.photoUrl = `https://picsum.photos/id/${id * 4 + 6}/300`;
 
     this.startDate = new Date();
     this.endDate = new Date();

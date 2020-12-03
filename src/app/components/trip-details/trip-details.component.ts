@@ -14,6 +14,9 @@ export class TripDetailsComponent implements OnInit {
   trip: Trip;
   id: number;
 
+  array = [1, 2, 3, 4];
+  effect = 'scrollx';
+
   constructor(
     private travelsService: TravelsService,
     private route: ActivatedRoute

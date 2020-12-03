@@ -31,11 +31,19 @@ export class TripComponent {
   }
 
   onReserveButtonClicked(): void {
+    if (this.trip.isFull) {
+      return;
+    }
+
     this.trip.reserve();
     this.reserved.emit(this.trip.id);
   }
 
   onUndoReserveButtonClicked(): void {
+    if (this.trip.isEmpty) {
+      return;
+    }
+
     this.trip.undoReserve();
     this.unreserved.emit(this.trip.id);
   }

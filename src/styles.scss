@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import '~normalize.css';
+@import "~normalize.css";
 @import "~ng-zorro-antd/ng-zorro-antd.min.css";
 
 .button {
@@ -29,4 +29,9 @@
 
 [nz-form] {
   max-width: 600px;
+}
+
+.ant-ribbon-color-green,
+.ant-ribbon-color-volcano {
+  color: white !important;
 }

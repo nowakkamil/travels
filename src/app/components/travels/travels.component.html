@@ -9,7 +9,7 @@
 
 <app-filter></app-filter>
 
-<mat-grid-list cols="4" rowHeight="300px">
+<mat-grid-list cols="4" rowHeight="700px">
   <mat-grid-tile *ngFor="let trip of trips">
     <app-trip [isHighest]="trip.id === minPriceId" [isLowest]="trip.id === maxPriceId" [trip]="trip"
       (rated)="onTripRated($event)" (removed)="onTripRemoved($event)" (reserved)="onTripReserved($event)"
