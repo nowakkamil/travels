@@ -1,7 +1,4 @@
-<div>
-  <app-trip-creation (saved)="onTripSaved($event)"></app-trip-creation>
-  <app-shopping-cart></app-shopping-cart>
-</div>
+<app-trip-creation (saved)="onTripSaved($event)"></app-trip-creation>
 
 <mat-card [ngClass]="{ 'booked-count--high': bookedTripsCount >= 10, 'booked-count--low': bookedTripsCount < 10 }"
   [ngStyle]="{'font-size': '1.4em'}">

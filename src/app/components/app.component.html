@@ -1,1 +1,26 @@
-<app-travels></app-travels>
+<ul nz-menu nzMode="horizontal">
+  <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }">
+    <a routerLink="/auth">
+      <i nz-icon nzType="user-switch" nzTheme="outline"></i>
+      Authenticate
+    </a>
+  </li>
+  <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }">
+    <a routerLink="/">
+      <i nz-icon nzType="unordered-list" nzTheme="outline"></i>
+      Travels
+    </a>
+  </li>
+  <!-- <li nz-menu-item>
+    <i nz-icon nzType="small-dash" nzTheme="outline"></i>
+    Details
+  </li> -->
+  <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }">
+    <a routerLink="/cart">
+      <i nz-icon nzType="shopping-cart" nzTheme="outline"></i>
+      Shopping Cart
+    </a>
+  </li>
+</ul>
+
+<router-outlet></router-outlet>

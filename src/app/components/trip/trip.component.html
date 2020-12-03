@@ -1,7 +1,9 @@
 <mat-card [ngClass]="{ 'trip-price--lowest': isLowest, 'trip-price--highest': isHighest }"
   [ngStyle]="{ 'padding': '1.3rem' }">
   <mat-card-header>
-    <img class="image" mat-card-avatar [src]="trip.photoUrl">
+    <a routerLink="/detail/{{trip.id}}">
+      <img class="image" mat-card-avatar [src]="trip.photoUrl">
+    </a>
     <mat-card-title>{{ trip.name | uppercase }}</mat-card-title>
     <mat-card-subtitle>{{ trip.destination | uppercase }}</mat-card-subtitle>
     <mat-card-subtitle>{{ trip.startDateFormatted }} - {{ trip.endDateFormatted }}</mat-card-subtitle>

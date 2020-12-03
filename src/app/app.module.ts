@@ -34,6 +34,8 @@ import { TripRatingComponent } from './components/trip-rating/trip-rating.compon
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { TripCreationComponent } from './components/trip-creation/trip-creation.component';
 import { FilterComponent } from './components/filter/filter.component';
+import { TripDetailsComponent } from './components/trip-details/trip-details.component';
+import { AuthComponent } from './components/auth/auth.component';
 
 registerLocaleData(en);
 
@@ -45,7 +47,9 @@ registerLocaleData(en);
     TripRatingComponent,
     ShoppingCartComponent,
     TripCreationComponent,
-    FilterComponent
+    FilterComponent,
+    TripDetailsComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
