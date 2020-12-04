@@ -19,7 +19,8 @@
 
 <ng-template #cover>
   <a routerLink="/detail/{{trip.id}}">
-    <img alt="{{trip.description}}" [src]="trip.photoUrl" />
+    <img style="  object-fit: cover;
+      width: 100%;" alt="{{trip.description}}" [src]="trip.photoUrl" />
   </a>
 </ng-template>
 <ng-template #reserve>

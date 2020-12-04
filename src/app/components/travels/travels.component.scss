@@ -5,3 +5,17 @@
 .booked-count--low {
   background-color: rgba(255, 0, 0, 0.54);
 }
+
+.travels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  column-gap: 4vw;
+  row-gap: 4vw;
+  margin: 5%;
+  padding-bottom: 5vh;
+}
+
+.travels * {
+  justify-self: center;
+  align-self: center;
+}
