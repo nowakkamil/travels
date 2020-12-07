@@ -1,51 +1,55 @@
-<div class="main">
-  <h3>New trip creation</h3>
-  <div>
-    <form nz-form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <nz-form-item>
-        <nz-form-label nz-for="name">Name</nz-form-label>
-        <input nz-input id="name" type="text" formControlName="name">
-      </nz-form-item>
+<button class="button-modal" nz-button nzType="primary" nzSize="large" nzShape="round" (click)="showModal()">
+  <i nz-icon nzType="plus-circle" nzTheme="fill"></i>
+  Create
+</button>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="New trip creation" (nzOnCancel)="handleCancel()" (nzOnOk)="handleSave()">
+  <form nz-form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <nz-form-item>
+      <nz-form-label nz-for="name">Name</nz-form-label>
+      <input nz-input id="name" type="text" formControlName="name">
+    </nz-form-item>
 
-      <nz-form-item>
-        <nz-form-label nz-for="destination">Destination</nz-form-label>
-        <input nz-input id="destination" type="text" formControlName="destination">
-      </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nz-for="destination">Destination</nz-form-label>
+      <input nz-input id="destination" type="text" formControlName="destination">
+    </nz-form-item>
 
-      <nz-form-item>
-        <nz-form-label nz-for="startDate">Start date</nz-form-label>
-        <nz-date-picker formControlName="startDate"></nz-date-picker>
-      </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nz-for="startDate">Start date</nz-form-label>
+      <nz-date-picker formControlName="startDate"></nz-date-picker>
+    </nz-form-item>
 
-      <nz-form-item>
-        <nz-form-label nz-for="endDate">End date</nz-form-label>
-        <nz-date-picker formControlName="endDate"></nz-date-picker>
-      </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nz-for="endDate">End date</nz-form-label>
+      <nz-date-picker formControlName="endDate"></nz-date-picker>
+    </nz-form-item>
 
-      <nz-form-item>
-        <nz-form-label nz-for="maxPeopleCount">Max people count</nz-form-label>
-        <nz-input-number [(ngModel)]="maxPeopleCount" [nzMin]="1" [nzStep]="1"></nz-input-number>
-      </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nz-for="maxPeopleCount">Max people count</nz-form-label>
+      <nz-input-number [(ngModel)]="maxPeopleCount" [nzMin]="1" [nzStep]="1"></nz-input-number>
+    </nz-form-item>
 
-      <nz-form-item>
-        <nz-form-label nz-for="description">Description</nz-form-label>
-        <textarea rows="4" nz-input [(ngModel)]="description"></textarea>
-      </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nz-for="description">Description</nz-form-label>
+      <textarea rows="4" nz-input [(ngModel)]="description"></textarea>
+    </nz-form-item>
 
-      <nz-form-item>
-        <nz-form-label nz-for="photoUrl">Photo URL</nz-form-label>
-        <input nz-input id="photoUrl" type="url" formControlName="photoUrl">
-      </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nz-for="photoUrl">Photo URL</nz-form-label>
+      <input nz-input id="photoUrl" type="url" formControlName="photoUrl">
+    </nz-form-item>
 
-      <nz-form-item>
-        <nz-form-label nz-for="price">Price in $</nz-form-label>
-        <input nz-input id="price" type="number" formControlName="price">
-      </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nz-for="price">Price in $</nz-form-label>
+      <input nz-input id="price" type="number" formControlName="price">
+    </nz-form-item>
+  </form>
 
-      <button nz-button nzType="primary">
-        <i nz-icon nzType="save" nzTheme="outline"></i>
-        Save
-      </button>
-    </form>
+  <div *nzModalFooter>
+    <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
+    <button nz-button nzType="primary" (click)="handleSave()">
+      <i nz-icon nzType="save" nzTheme="outline"></i>
+      Save
+    </button>
   </div>
-</div>
+</nz-modal>

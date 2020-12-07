@@ -22,6 +22,8 @@ export class TripCreationComponent implements OnInit {
   photoUrl = new FormControl('', Validators.required);
   price = new FormControl('', Validators.required);
 
+  isVisible = false;
+
   constructor(private builder: FormBuilder) { }
 
   ngOnInit(): void {
@@ -39,5 +41,18 @@ export class TripCreationComponent implements OnInit {
 
   onSubmit(): void {
     this.saved.emit(this.form.value);
+  }
+
+  showModal(): void {
+    this.isVisible = true;
+  }
+
+  handleSave(): void {
+    this.onSubmit();
+    this.isVisible = false;
+  }
+
+  handleCancel(): void {
+    this.isVisible = false;
   }
 }

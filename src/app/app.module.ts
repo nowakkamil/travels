@@ -30,6 +30,7 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzCommentModule } from 'ng-zorro-antd/comment';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 import { HttpClientModule } from '@angular/common/http';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_GB } from 'ng-zorro-antd/i18n';
@@ -63,7 +64,6 @@ registerLocaleData(en);
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-
     NzButtonModule,
     MatButtonModule,
     MatCardModule,
@@ -87,7 +87,8 @@ registerLocaleData(en);
     NzPopconfirmModule,
     NzBadgeModule,
     NzDescriptionsModule,
-    NzCommentModule
+    NzCommentModule,
+    NzModalModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_GB }],
   bootstrap: [AppComponent]
