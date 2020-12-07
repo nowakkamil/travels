@@ -7,12 +7,13 @@
   </mat-card-header>
 </mat-card>
 
-<app-filter></app-filter>
-
-<div class="travels">
-  <div *ngFor="let trip of trips">
-    <app-trip [isHighest]="trip.id === minPriceId" [isLowest]="trip.id === maxPriceId" [trip]="trip"
-      (rated)="onTripRated($event)" (removed)="onTripRemoved($event)" (reserved)="onTripReserved($event)"
-      (unreserved)="onTripUnreserved($event)"></app-trip>
+<div class="filter-and-travels">
+  <app-filter></app-filter>
+  <div class="travels">
+    <div *ngFor="let trip of trips">
+      <app-trip [isHighest]="trip.id === minPriceId" [isLowest]="trip.id === maxPriceId" [trip]="trip"
+        (rated)="onTripRated($event)" (removed)="onTripRemoved($event)" (reserved)="onTripReserved($event)"
+        (unreserved)="onTripUnreserved($event)"></app-trip>
+    </div>
   </div>
 </div>

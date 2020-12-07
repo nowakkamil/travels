@@ -1,34 +1,36 @@
-<div class="filter">
-  <div class="price">
-    <span>Price: </span>
-    <nz-slider [nzMarks]="prices" nzIncluded nzRange [ngModel]="[minimumPrice, maximumPrice]" [nzMin]="1" [nzMax]="10000"
-      (ngModelChange)="setPrice($event)">
-    </nz-slider>
+<div class="filter-wrapper">
+  <div class="filter">
+    <div class="price">
+      <span>Price: </span>
+      <nz-slider [nzMarks]="prices" nzIncluded nzRange [ngModel]="[minimumPrice, maximumPrice]" [nzMin]="1"
+        [nzMax]="10000" (ngModelChange)="setPrice($event)">
+      </nz-slider>
+    </div>
+
+    <div class="date">
+      <nz-date-picker [nzDisabledDate]="disabledStartDate" nzFormat="yyyy-MM-dd" [(ngModel)]="startDate"
+        nzPlaceHolder="Start" (nzOnOpenChange)="handleStartOpenChange($event)"></nz-date-picker>
+      <nz-date-picker #endDatePicker [nzDisabledDate]="disabledEndDate" nzFormat="yyyy-MM-dd" [(ngModel)]="endDate"
+        nzPlaceHolder="End" (nzOnOpenChange)="handleEndOpenChange($event)"></nz-date-picker>
+    </div>
+
+    <div class="rating">
+      <span>Minimum: </span>
+      <app-trip-rating [rating]="minimumRating" (rated)="setMinimumRating($event)"></app-trip-rating>
+      <span>Maximum: </span>
+      <app-trip-rating [rating]="maximumRating" (rated)="setMaximumRating($event)"></app-trip-rating>
+    </div>
+
+    <nz-input-group [nzPrefix]="prefixTemplateDestionation">
+      <input nz-input type="text" placeholder="Destination" [(ngModel)]="destination" />
+    </nz-input-group>
+    <ng-template #prefixTemplateDestionation>
+      <i nz-icon nzType="node-index" nzTheme="outline"></i>
+    </ng-template>
+
+    <button nz-button nzType="primary" (click)="filterTravels()">
+      <i nz-icon nzType="filter" nzTheme="outline"></i>
+      Filter
+    </button>
   </div>
-
-  <div class="date">
-    <nz-date-picker [nzDisabledDate]="disabledStartDate" nzFormat="yyyy-MM-dd" [(ngModel)]="startDate"
-      nzPlaceHolder="Start" (nzOnOpenChange)="handleStartOpenChange($event)"></nz-date-picker>
-    <nz-date-picker #endDatePicker [nzDisabledDate]="disabledEndDate" nzFormat="yyyy-MM-dd" [(ngModel)]="endDate"
-      nzPlaceHolder="End" (nzOnOpenChange)="handleEndOpenChange($event)"></nz-date-picker>
-  </div>
-
-  <div class="rating">
-    <span>Minimum rating: </span>
-    <nz-rate [ngModel]="minimumRating" (ngModelChange)="setMinimumRating($event)"></nz-rate>
-    <span>Maximum rating: </span>
-    <nz-rate [ngModel]="maximumRating" (ngModelChange)="setMaximumRating($event)"></nz-rate>
-  </div>
-
-  <nz-input-group [nzPrefix]="prefixTemplateDestionation">
-    <input nz-input type="text" placeholder="Destination" [(ngModel)]="destination" />
-  </nz-input-group>
-  <ng-template #prefixTemplateDestionation>
-    <i nz-icon nzType="node-index" nzTheme="outline"></i>
-  </ng-template>
-
-  <button nz-button nzType="primary" (click)="filterTravels()">
-    <i nz-icon nzType="filter" nzTheme="outline"></i>
-    Filter
-  </button>
 </div>
