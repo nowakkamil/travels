@@ -3,6 +3,7 @@ export const environment = {
   firebaseConfig: {
     apiKey: 'AIzaSyDr8Z0snOMgDSxFwruf-UORbss7uACFDQk',
     authDomain: 'travels-web-api.firebaseapp.com',
+    databaseURL: 'https://travels-web-api-default-rtdb.firebaseio.com',
     projectId: 'travels-web-api',
     storageBucket: 'travels-web-api.appspot.com',
     messagingSenderId: '752011249969',

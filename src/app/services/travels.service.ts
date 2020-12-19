@@ -2,17 +2,32 @@ import { Filter as FilterInterface } from 'src/app/_types/filter';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Trip, TripInterface } from '../_models/trip';
-
-import Trips from '../data/trips';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TravelsService {
 
-  trips = Trips;
-  unfilteredTrips = Trips;
-  filterChange = new Subject<Array<Trip>>();
+  trips: Array<any>;
+  unfilteredTrips: Array<any>;
+  filterChange = new Subject<Array<any>>();
+
+  constructor(private db: AngularFireDatabase) {
+    this.populateTrips();
+  }
+
+  populateTrips(): void {
+    this.db.list('/trips')
+      .valueChanges()
+      .subscribe(
+        trips => {
+          this.trips = trips;
+          this.unfilteredTrips = trips;
+          this.emitFilterChange();
+        },
+        err => console.log(err));
+  }
 
   getAll(): Array<Trip> {
     return this.trips;

@@ -47,6 +47,7 @@ import { AuthComponent } from './components/auth/auth.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
 
 registerLocaleData(en);
@@ -96,8 +97,9 @@ registerLocaleData(en);
     NzModalModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
+    AngularFireDatabaseModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_GB }],
+  providers: [{ provide: NZ_I18N, useValue: en_GB }, AngularFireDatabaseModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
