@@ -1,4 +1,4 @@
-<ul *ngIf="isLoggedIn" nz-menu nzMode="horizontal">
+<ul *ngIf="isLoggedIn" class="navbar" nz-menu nzMode="horizontal">
   <!-- <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }">
     <a routerLink="/auth">
       <i nz-icon nzType="user-switch" nzTheme="outline"></i>
@@ -28,5 +28,7 @@
     </button>
   </li>
 </ul>
+
+<div class="navbar-placeholder"></div>
 
 <router-outlet></router-outlet>

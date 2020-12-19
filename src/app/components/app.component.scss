@@ -1,3 +1,15 @@
+.navbar {
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  width: 100%;
+  background: white;
+
+  &-placeholder {
+    margin-bottom: 48px;
+  }
+}
+
 .sign-out-item {
   float: right;
 }
