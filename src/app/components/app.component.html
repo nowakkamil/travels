@@ -1,10 +1,10 @@
-<ul nz-menu nzMode="horizontal">
-  <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }">
+<ul *ngIf="isLoggedIn" nz-menu nzMode="horizontal">
+  <!-- <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }">
     <a routerLink="/auth">
       <i nz-icon nzType="user-switch" nzTheme="outline"></i>
       Authenticate
     </a>
-  </li>
+  </li> -->
   <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }">
     <a routerLink="/">
       <i nz-icon nzType="unordered-list" nzTheme="outline"></i>
@@ -20,6 +20,12 @@
       <i nz-icon nzType="shopping-cart" nzTheme="outline"></i>
       Shopping Cart
     </a>
+  </li>
+  <li class="sign-out-item">
+    <button nz-button nzType="text" (click)="signOut()">
+      <i nz-icon nzType="logout" nzTheme="outline"></i>
+      Sign out
+    </button>
   </li>
 </ul>
 

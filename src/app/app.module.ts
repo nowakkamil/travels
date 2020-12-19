@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
 import { NzFormModule } from 'ng-zorro-antd/form';
 
+import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -44,6 +45,9 @@ import { FilterComponent } from './components/filter/filter.component';
 import { TripDetailsComponent } from './components/trip-details/trip-details.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from '../environments/environment';
 
 registerLocaleData(en);
 
@@ -75,6 +79,7 @@ registerLocaleData(en);
     NzMenuModule,
     NzFormModule,
     NzRateModule,
+    NzMessageModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
@@ -88,7 +93,9 @@ registerLocaleData(en);
     NzBadgeModule,
     NzDescriptionsModule,
     NzCommentModule,
-    NzModalModule
+    NzModalModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_GB }],
   bootstrap: [AppComponent]

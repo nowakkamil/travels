@@ -1,6 +1,8 @@
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -17,11 +19,14 @@ export class AuthComponent implements OnInit {
     theme: 'twotone'
   };
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      userName: [null, [Validators.required]],
+      email: [null, [Validators.email, Validators.required]],
       password: [null, [Validators.required]],
       remember: [true]
     });
@@ -40,16 +45,29 @@ export class AuthComponent implements OnInit {
 
   submitLoginForm(): void {
     for (const i in this.loginForm.controls) {
-      this.loginForm.controls[i].markAsDirty();
-      this.loginForm.controls[i].updateValueAndValidity();
+      if (this.loginForm.controls.hasOwnProperty(i)) {
+        this.loginForm.controls[i].markAsDirty();
+        this.loginForm.controls[i].updateValueAndValidity();
+      }
     }
+
+    this.authService.login(this.loginForm.value)
+      .then(() => this.router.navigateByUrl(''))
+      .then(() => window.location.reload())
+      .catch(console.error);
   }
 
   submitRegisterForm(): void {
     for (const i in this.registerForm.controls) {
-      this.registerForm.controls[i].markAsDirty();
-      this.registerForm.controls[i].updateValueAndValidity();
+      if (this.registerForm.controls.hasOwnProperty(i)) {
+        this.registerForm.controls[i].markAsDirty();
+        this.registerForm.controls[i].updateValueAndValidity();
+      }
     }
+
+    this.authService.register(this.registerForm.value)
+      .then(() => this.router.navigateByUrl(''))
+      .catch(console.error);
   }
 
   updateConfirmValidator(): void {

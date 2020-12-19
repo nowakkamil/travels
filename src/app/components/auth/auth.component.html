@@ -49,9 +49,9 @@
 <ng-template #elseBlock>
   <form nz-form [formGroup]="loginForm" class="login-form" (ngSubmit)="submitLoginForm()">
     <nz-form-item>
-      <nz-form-control nzErrorTip="Please input your username!">
+      <nz-form-control nzErrorTip="Please input your email address!">
         <nz-input-group nzPrefixIcon="user">
-          <input type="text" nz-input formControlName="userName" placeholder="Username" />
+          <input type="text" nz-input formControlName="email" placeholder="email" />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
