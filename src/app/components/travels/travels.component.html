@@ -1,6 +1,7 @@
 <app-trip-creation (saved)="onTripSaved($event)"></app-trip-creation>
 
-<mat-card [ngClass]="{ 'booked-count--high': bookedTripsCount >= 10, 'booked-count--low': bookedTripsCount < 10 }"
+<mat-card *ngIf="trips"
+  [ngClass]="{ 'booked-count--high': bookedTripsCount >= 10, 'booked-count--low': bookedTripsCount < 10 }"
   [ngStyle]="{'font-size': '1.4em'}">
   <mat-card-header>
     <mat-card-title>Booked trips: {{ bookedTripsCount }}</mat-card-title>
@@ -9,7 +10,7 @@
 
 <div class="filter-and-travels">
   <app-filter></app-filter>
-  <div class="travels">
+  <div *ngIf="trips" class="travels">
     <div *ngFor="let trip of trips">
       <app-trip [isHighest]="trip.id === minPriceId" [isLowest]="trip.id === maxPriceId" [trip]="trip"
         (rated)="onTripRated($event)" (removed)="onTripRemoved($event)" (reserved)="onTripReserved($event)"

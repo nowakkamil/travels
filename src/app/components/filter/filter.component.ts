@@ -41,14 +41,14 @@ export class FilterComponent implements FilterInterface {
     if (!startDate || !this.endDate) {
       return false;
     }
-    return startDate.getTime() > this.endDate.getTime();
+    return startDate > this.endDate;
   }
 
   disabledEndDate = (endDate: Date): boolean => {
     if (!endDate || !this.startDate) {
       return false;
     }
-    return endDate.getTime() <= this.startDate.getTime();
+    return endDate <= this.startDate;
   }
 
   handleStartOpenChange(open: boolean): void {
@@ -81,7 +81,7 @@ export class FilterComponent implements FilterInterface {
   }
 
   filterTravels(): void {
-    this.travelsService.filterTravels({...this});
+    this.travelsService.filterTravels({ ...this });
   }
 
 }

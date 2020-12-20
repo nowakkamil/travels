@@ -70,7 +70,7 @@ export class TravelsComponent implements OnInit {
     this.trips = this.trips.filter(trip => trip.id !== id);
   }
 
-  onTripSaved(data: TripInterface): void {
+  onTripSaved(data: Trip): void {
     this.travelsService.create(data);
   }
 

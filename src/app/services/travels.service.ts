@@ -1,27 +1,34 @@
-import { Filter as FilterInterface } from 'src/app/_types/filter';
+import { Filter, Filter as FilterInterface } from 'src/app/_types/filter';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Trip, TripInterface } from '../_models/trip';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { Trip } from '../_models/trip';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { TripAngularFire } from '../_models/trip-angular-fire';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TravelsService {
 
-  trips: Array<any>;
-  unfilteredTrips: Array<any>;
-  filterChange = new Subject<Array<any>>();
+  trips: Array<Trip>;
+  unfilteredTrips: Array<Trip>;
+  tripsAngularFireList: AngularFireList<TripAngularFire>;
+  filter: Filter;
+  filterChange = new Subject<Array<Trip>>();
 
   constructor(private db: AngularFireDatabase) {
     this.populateTrips();
   }
 
   populateTrips(): void {
-    this.db.list('/trips')
-      .valueChanges()
+    this.tripsAngularFireList = this.db.list<TripAngularFire>('/trips');
+    this.tripsAngularFireList.valueChanges()
       .subscribe(
-        trips => {
+        response => {
+          const trips = Array.isArray(response)
+            ? response.map(trip => Trip.fromAngularInterface(trip))
+            : [Trip.fromAngularInterface(response)];
+
           this.trips = trips;
           this.unfilteredTrips = trips;
           this.emitFilterChange();
@@ -37,20 +44,28 @@ export class TravelsService {
     return this.trips.find(trip => trip.id === id);
   }
 
-  create(trip: TripInterface): void {
-    this.trips.push(Trip.fromInterface(trip));
+  create(trip: Trip): void {
+    const newTrip = TripAngularFire.fromInterface(trip);
+    this.tripsAngularFireList.push(newTrip)
+      .then(() => {
+        if (this.filter) {
+          this.filterTravels(this.filter);
+        }
+      })
+      .catch(console.log);
   }
 
   emitFilterChange(): void {
     this.filterChange.next(this.trips);
   }
 
-  filterTravels(filter: FilterInterface): void {
+  filterTravels(filter: Filter): void {
     if (!filter) {
       console.error(`Invalid filter. Received: ${filter}`);
       return;
     }
 
+    this.filter = filter;
     let trips = this.unfilteredTrips;
 
     if (filter.minimumPrice) {
@@ -89,4 +104,5 @@ export class TravelsService {
     this.trips = trips;
     this.emitFilterChange();
   }
+
 }

@@ -1,4 +1,5 @@
 import { Trip as TripInterface } from '../_types/trip';
+import { TripAngularFire } from '../_types/trip-angular-fire';
 
 class Trip implements TripInterface {
   static lastId = 0;
@@ -25,13 +26,24 @@ class Trip implements TripInterface {
     trip.photoUrl = data.photoUrl;
     trip.price = data.price;
     trip.rating = data.rating;
+    trip.startDate = data.startDate;
+    trip.endDate = data.endDate;
 
-    // TODO
-    // trip.startDate = data.startDate;
-    trip.startDate = new Date();
-    // TODO
-    // trip.endDate = data.endDate;
-    trip.endDate = new Date();
+    return trip;
+  }
+
+  static fromAngularInterface(data: TripAngularFire): Trip {
+    const trip = new Trip(Trip.lastId + 1);
+
+    trip.description = data.description;
+    trip.destination = data.destination;
+    trip.maxPeopleCount = data.maxPeopleCount;
+    trip.name = data.name;
+    trip.photoUrl = data.photoUrl;
+    trip.price = data.price;
+    trip.rating = data.rating;
+    trip.startDate = new Date(data.startDate);
+    trip.endDate = new Date(data.endDate);
 
     return trip;
   }
@@ -72,11 +84,11 @@ class Trip implements TripInterface {
   }
 
   get startDateFormatted(): string {
-    return this.startDate.toDateString();
+    return new Date(this.startDate).toDateString();
   }
 
   get endDateFormatted(): string {
-    return this.endDate.toDateString();
+    return new Date(this.endDate).toDateString();
   }
 
   setRating(rating: number): void {
