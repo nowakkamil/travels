@@ -32,6 +32,7 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzCommentModule } from 'ng-zorro-antd/comment';
+import { NzListModule } from 'ng-zorro-antd/list';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { HttpClientModule } from '@angular/common/http';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
@@ -95,6 +96,7 @@ registerLocaleData(en);
     NzBadgeModule,
     NzDescriptionsModule,
     NzCommentModule,
+    NzListModule,
     NzModalModule,
     NzTagModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),

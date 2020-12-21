@@ -4,6 +4,7 @@ import firebase from 'firebase/app';
 import { Observable } from 'rxjs/index';
 import { first } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 export interface Credentials {
   email: string;
@@ -13,7 +14,9 @@ export interface Credentials {
 export class AuthService {
 
   readonly authState$: Observable<firebase.User | null> = this.firebaseAuth.authState;
-  constructor(private firebaseAuth: AngularFireAuth) { }
+  constructor(
+    private firebaseAuth: AngularFireAuth,
+    private db: AngularFireDatabase) { }
 
   get user(): Observable<firebase.User | null> {
     return this.firebaseAuth.user;
@@ -42,8 +45,16 @@ export class AuthService {
     return this.firebaseAuth.signInWithEmailAndPassword(email, password);
   }
 
-  register({ email, password }: Credentials): Promise<firebase.auth.UserCredential> {
-    return this.firebaseAuth.createUserWithEmailAndPassword(email, password);
+  register({ email, password, userName }): Promise<firebase.auth.UserCredential> {
+    const registrationPromise = this.firebaseAuth.createUserWithEmailAndPassword(email, password);
+
+    registrationPromise.then(user => {
+      const userData = { email, userName };
+      this.db.database.ref('/users').child(user.user.uid).set(userData);
+      return user;
+    });
+
+    return registrationPromise;
   }
 
   signOut(): Promise<void> {

@@ -35,7 +35,7 @@ export class AuthComponent implements OnInit {
       email: [null, [Validators.email, Validators.required]],
       password: [null, [Validators.required]],
       checkPassword: [null, [Validators.required, this.confirmationValidator]],
-      nickname: [null, [Validators.required]]
+      userName: [null, [Validators.required]]
     });
   }
 
@@ -67,6 +67,7 @@ export class AuthComponent implements OnInit {
 
     this.authService.register(this.registerForm.value)
       .then(() => this.router.navigateByUrl(''))
+      .then(() => window.location.reload())
       .catch(console.error);
   }
 
