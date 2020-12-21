@@ -1,5 +1,5 @@
-<div *ngIf="trip">
-  <nz-descriptions nzTitle="{{trip.name}}" nzBordered>
+<div class="trip-details" *ngIf="trip">
+  <nz-descriptions class="trip-details-name" nzTitle="{{trip.name}}" nzBordered>
     <nz-descriptions-item [nzSpan]="2" nzTitle="Destination">{{trip.destination}}</nz-descriptions-item>
     <nz-descriptions-item [nzSpan]="2" nzTitle="Price">{{trip.price}}$</nz-descriptions-item>
     <nz-descriptions-item [nzSpan]="2" nzTitle="Description">{{trip.description}}</nz-descriptions-item>
@@ -13,11 +13,13 @@
       <nz-date-picker nzBorderless nzDisabled nzFormat="yyyy-MM-dd" [(ngModel)]="trip.endDate"></nz-date-picker>
     </nz-descriptions-item>
   </nz-descriptions>
-  <nz-carousel>
-    <div nz-carousel-content *ngFor="let photoUrl of photosUrls">
-      <img alt="{{trip.description}}" [src]="photoUrl" />
-    </div>
-  </nz-carousel>
+  <div class="nz-carousel-wrapper">
+    <nz-carousel>
+      <div nz-carousel-content *ngFor="let photoUrl of photosUrls">
+        <img alt="{{trip.description}}" [src]="photoUrl" />
+      </div>
+    </nz-carousel>
+  </div>
   <nz-list *ngIf="data.length" [nzDataSource]="data" [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
     <ng-template #item let-item>
       <nz-comment [nzAuthor]="item.authorId" [nzDatetime]="item.displayTime">
