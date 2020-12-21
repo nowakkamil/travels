@@ -1,4 +1,4 @@
-<app-trip-creation (saved)="onTripSaved($event)"></app-trip-creation>
+<app-trip-creation [isAdmin]="isAdmin" (saved)="onTripSaved($event)"></app-trip-creation>
 
 <mat-card *ngIf="trips"
   [ngClass]="{ 'booked-count--high': bookedTripsCount >= 10, 'booked-count--low': bookedTripsCount < 10 }"
@@ -12,9 +12,9 @@
   <app-filter></app-filter>
   <div *ngIf="trips" class="travels">
     <div *ngFor="let trip of trips">
-      <app-trip [isHighest]="trip.id === minPriceId" [isLowest]="trip.id === maxPriceId" [trip]="trip"
-        (rated)="onTripRated($event)" (removed)="onTripRemoved($event)" (reserved)="onTripReserved($event)"
-        (unreserved)="onTripUnreserved($event)"></app-trip>
+      <app-trip [isAdmin]="isAdmin" [isHighest]="trip.id === minPriceId" [isLowest]="trip.id === maxPriceId"
+        [trip]="trip" (rated)="onTripRated($event)" (removed)="onTripRemoved($event)"
+        (reserved)="onTripReserved($event)" (unreserved)="onTripUnreserved($event)"></app-trip>
     </div>
   </div>
 </div>

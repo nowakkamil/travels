@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Trip, TripInterface } from '../../_models/trip';
+import { Trip } from '../../_models/trip';
 import { TravelsService } from '../../services/travels.service';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-travels',
@@ -11,10 +12,14 @@ import { ShoppingCartService } from '../../services/shopping-cart.service';
 })
 export class TravelsComponent implements OnInit {
   trips: Array<Trip> = [];
+  isAdmin: boolean;
 
   constructor(
+    private authService: AuthService,
     private travelsService: TravelsService,
-    private shoppingCartService: ShoppingCartService) { }
+    private shoppingCartService: ShoppingCartService) {
+    this.authService.isAdmin().then(result => this.isAdmin = result);
+  }
 
   ngOnInit(): void {
     this.loadTrips();

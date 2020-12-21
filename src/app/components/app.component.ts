@@ -1,5 +1,5 @@
 import { AuthService } from './../services/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Router } from '@angular/router';
 import firebase from 'firebase/app';
@@ -9,7 +9,7 @@ import firebase from 'firebase/app';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'Travels';
   user: firebase.User | null;
   isLoggedIn = false;
@@ -17,15 +17,8 @@ export class AppComponent implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private message: NzMessageService) { }
-
-  ngOnInit(): void {
-    this.setIsLoggedIn();
-  }
-
-  async setIsLoggedIn(): Promise<void> {
-    const user = await this.authService.isLoggedIn();
-    this.isLoggedIn = user ? true : false;
+    private message: NzMessageService) {
+    this.authService.getUserPromise().then(user => this.isLoggedIn = user ? true : false);
   }
 
   signOut(): void {

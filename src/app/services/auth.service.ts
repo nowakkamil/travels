@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
 import { Observable } from 'rxjs/index';
 import { first } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 export interface Credentials {
   email: string;
@@ -18,7 +19,12 @@ export class AuthService {
     return this.firebaseAuth.user;
   }
 
-  isLoggedIn(): Promise<firebase.User | null> {
+  async isAdmin(): Promise<boolean> {
+    const user = await this.getUserPromise();
+    return environment.adminId === user.uid;
+  }
+
+  getUserPromise(): Promise<firebase.User | null> {
     return this.firebaseAuth.authState.pipe(first()).toPromise();
   }
 

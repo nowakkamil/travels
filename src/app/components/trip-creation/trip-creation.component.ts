@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Trip } from '../../_types/trip';
@@ -9,6 +9,8 @@ import { Trip } from '../../_types/trip';
   styleUrls: ['./trip-creation.component.scss']
 })
 export class TripCreationComponent implements OnInit {
+  @Input() isAdmin: boolean;
+
   @Output() saved = new EventEmitter<Trip>();
 
   form: FormGroup;

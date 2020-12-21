@@ -11,6 +11,7 @@ export class TripComponent {
   @Input() isHighest: boolean;
   @Input() isLowest: boolean;
   @Input() trip: Trip;
+  @Input() isAdmin: boolean;
 
   @Output() removed = new EventEmitter<string>();
   @Output() rated = new EventEmitter<{ id: number, rating: number }>();

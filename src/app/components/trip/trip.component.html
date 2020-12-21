@@ -12,6 +12,14 @@
 </ng-template>
 
 <ng-template #card>
+  <ng-container *ngIf="!isAdmin ;else cardAdmin">
+    <nz-card class="card" [nzCover]="cover" [nzActions]="[reserve, undoReserve]">
+      <nz-card-meta [nzDescription]="description" [nzTitle]="title"></nz-card-meta>
+    </nz-card>
+  </ng-container>
+</ng-template>
+
+<ng-template #cardAdmin>
   <nz-card class="card" [nzCover]="cover" [nzActions]="[reserve, undoReserve, remove]">
     <nz-card-meta [nzDescription]="description" [nzTitle]="title"></nz-card-meta>
   </nz-card>
