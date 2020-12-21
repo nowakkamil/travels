@@ -16,6 +16,8 @@ class Trip implements TripInterface {
   maxPeopleCount: number;
   photoUrl: string;
 
+  key: string;
+
   static fromInterface(data: TripInterface): Trip {
     const trip = new Trip(Trip.lastId + 1);
 
@@ -44,6 +46,8 @@ class Trip implements TripInterface {
     trip.rating = data.rating;
     trip.startDate = new Date(data.startDate);
     trip.endDate = new Date(data.endDate);
+
+    trip.key = data.key;
 
     return trip;
   }

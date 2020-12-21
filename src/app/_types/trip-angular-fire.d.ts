@@ -1,4 +1,5 @@
 interface TripAngularFire {
+  key: string;
   rating: number;
   id: number;
   name: string;

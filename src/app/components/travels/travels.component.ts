@@ -66,8 +66,8 @@ export class TravelsComponent implements OnInit {
     entry?.setRating(data.rating);
   }
 
-  onTripRemoved(id: number): void {
-    this.trips = this.trips.filter(trip => trip.id !== id);
+  onTripRemoved(key: string): void {
+    this.travelsService.remove(key);
   }
 
   onTripSaved(data: Trip): void {

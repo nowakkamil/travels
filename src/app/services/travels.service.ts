@@ -1,9 +1,10 @@
-import { Filter, Filter as FilterInterface } from 'src/app/_types/filter';
+import { Filter } from 'src/app/_types/filter';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Trip } from '../_models/trip';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { TripAngularFire } from '../_models/trip-angular-fire';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,10 @@ export class TravelsService {
 
   populateTrips(): void {
     this.tripsAngularFireList = this.db.list<TripAngularFire>('/trips');
-    this.tripsAngularFireList.valueChanges()
-      .subscribe(
+    this.tripsAngularFireList.snapshotChanges()
+      .pipe(map(changes => changes.map(
+        (c: { payload: { key: any; val: () => any; }; }) => ({ key: c.payload.key, ...c.payload.val() })))
+      ).subscribe(
         response => {
           const trips = Array.isArray(response)
             ? response.map(trip => Trip.fromAngularInterface(trip))
@@ -32,8 +35,7 @@ export class TravelsService {
           this.trips = trips;
           this.unfilteredTrips = trips;
           this.emitFilterChange();
-        },
-        err => console.log(err));
+        }, err => console.log(err));
   }
 
   getAll(): Array<Trip> {
@@ -103,6 +105,12 @@ export class TravelsService {
 
     this.trips = trips;
     this.emitFilterChange();
+  }
+
+  remove(key: string): void {
+    this.tripsAngularFireList
+      .remove(key)
+      .catch(console.log);
   }
 
 }

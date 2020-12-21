@@ -12,7 +12,7 @@ export class TripComponent {
   @Input() isLowest: boolean;
   @Input() trip: Trip;
 
-  @Output() removed = new EventEmitter<number>();
+  @Output() removed = new EventEmitter<string>();
   @Output() rated = new EventEmitter<{ id: number, rating: number }>();
   @Output() reserved = new EventEmitter<number>();
   @Output() unreserved = new EventEmitter<number>();
@@ -27,7 +27,7 @@ export class TripComponent {
   }
 
   onRemoveButtonClicked(): void {
-    this.removed.emit(this.trip.id);
+    this.removed.emit(this.trip.key);
   }
 
   onReserveButtonClicked(): void {

@@ -2,6 +2,7 @@ import { TripAngularFire as TripAngularFireInterface } from '../_types/trip-angu
 import { TripInterface } from './trip';
 
 class TripAngularFire implements TripAngularFireInterface {
+  key: string;
   rating: number;
   id: number;
   name: string;
