@@ -1,3 +1,4 @@
+import { UsersService } from './../../services/users.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TravelsService } from 'src/app/services/travels.service';
@@ -6,6 +7,7 @@ import { formatDistance } from 'date-fns';
 import { Trip } from '../../_models/trip';
 import { Comment } from '../../_models/comment';
 import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/_models/user';
 
 @Component({
   selector: 'app-trip-details',
@@ -16,6 +18,7 @@ export class TripDetailsComponent implements OnInit {
 
   key: string;
   trip: Trip;
+  users: User[];
   photosUrls: Array<string>;
   data: Comment[] = [];
   submitting = false;
@@ -23,18 +26,21 @@ export class TripDetailsComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private usersService: UsersService,
     private travelsService: TravelsService,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    this.usersService.getAllPromise().subscribe(users => {
+      this.users = users;
+      this.data = this.mapToUsername(this.trip.comments);
+    });
     this.key = this.route.snapshot.paramMap.get('key');
     this.trip = this.travelsService.getByKey(this.key);
     this.photosUrls = Array(4)
       .fill(null)
       .map((_, index) => `https://picsum.photos/id/${Math.round(Math.random() * 20) + index}/400`);
-
-    this.data = this.trip.comments;
   }
 
   async handleSubmit(): Promise<void> {
@@ -55,7 +61,23 @@ export class TripDetailsComponent implements OnInit {
       .updateComments(this.trip.key, newComment)
       .then(() => {
         this.submitting = false;
-        this.data = [...this.data, newComment];
+        this.data = this.mapToUsername([...this.data, newComment]);
       });
+  }
+
+  mapToUsername(comments: Comment[]): Comment[] {
+    return comments.map(comment => {
+      const user = this.users.find(u => u.key === comment.authorId);
+      if (!user) {
+        return comment;
+      }
+
+      return Comment.fromInterface({
+        authorId: user.userName,
+        content: comment.content,
+        date: comment.date,
+        displayTime: comment.displayTime
+      });
+    });
   }
 }
