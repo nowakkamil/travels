@@ -14,13 +14,13 @@ export class TripComponent {
   @Input() isAdmin: boolean;
 
   @Output() removed = new EventEmitter<string>();
-  @Output() rated = new EventEmitter<{ id: number, rating: number }>();
+  @Output() rated = new EventEmitter<{ key: string, rating: number }>();
   @Output() reserved = new EventEmitter<number>();
   @Output() unreserved = new EventEmitter<number>();
 
   onTripRated(rating: number): void {
     const data = {
-      id: this.trip.id,
+      key: this.trip.key,
       rating
     };
 

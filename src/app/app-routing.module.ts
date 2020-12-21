@@ -8,7 +8,7 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
 import { AuthGuestGuardService } from './services/auth-guest-guard.service';
 
 const routes: Routes = [
-  { path: 'detail/:id', component: TripDetailsComponent, canActivate: [AuthGuardService] },
+  { path: 'detail/:key', component: TripDetailsComponent, canActivate: [AuthGuardService] },
   { path: 'cart', component: ShoppingCartComponent, canActivate: [AuthGuardService] },
   { path: 'auth', component: AuthComponent, canActivate: [AuthGuestGuardService] },
   { path: '', component: TravelsComponent, canActivate: [AuthGuardService] },

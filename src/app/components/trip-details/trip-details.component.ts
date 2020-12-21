@@ -4,6 +4,8 @@ import { TravelsService } from 'src/app/services/travels.service';
 import { formatDistance } from 'date-fns';
 
 import { Trip } from '../../_models/trip';
+import { Comment } from '../../_models/comment';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-trip-details',
@@ -12,52 +14,48 @@ import { Trip } from '../../_models/trip';
 })
 export class TripDetailsComponent implements OnInit {
 
+  key: string;
   trip: Trip;
-  id: number;
   photosUrls: Array<string>;
-  time = formatDistance(new Date(), new Date());
-  data: any[] = [];
+  data: Comment[] = [];
   submitting = false;
-  user = {
-    author: 'Test author',
-    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
-  };
   inputValue = '';
 
   constructor(
+    private authService: AuthService,
     private travelsService: TravelsService,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.id = +this.route.snapshot.paramMap.get('id');
-    this.trip = this.travelsService.getById(this.id);
+    this.key = this.route.snapshot.paramMap.get('key');
+    this.trip = this.travelsService.getByKey(this.key);
     this.photosUrls = Array(4)
       .fill(null)
-      .map((_, index) => `https://picsum.photos/id/${this.id * 20 + index}/400`);
+      .map((_, index) => `https://picsum.photos/id/${Math.round(Math.random() * 20) + index}/400`);
+
+    this.data = this.trip.comments;
   }
 
-  handleSubmit(): void {
+  async handleSubmit(): Promise<void> {
     this.submitting = true;
-    const content = this.inputValue;
+    const newContent = this.inputValue;
     this.inputValue = '';
-    setTimeout(() => {
-      this.submitting = false;
-      this.data = [
-        ...this.data,
-        {
-          ...this.user,
-          content,
-          datetime: new Date(),
-          displayTime: formatDistance(new Date(), new Date())
-        }
-      ].map(e => {
-        return {
-          ...e,
-          displayTime: formatDistance(new Date(), e.datetime)
-        };
-      });
-    }, 800);
-  }
+    const userId = await this.authService.getUserId();
+    const dateNow = Date.now();
 
+    const newComment = Comment.fromInterface({
+      authorId: userId,
+      content: newContent,
+      date: dateNow,
+      displayTime: formatDistance(new Date(dateNow), new Date(dateNow))
+    });
+
+    this.travelsService
+      .updateComments(this.trip.key, newComment)
+      .then(() => {
+        this.submitting = false;
+        this.data = [...this.data, newComment];
+      });
+  }
 }

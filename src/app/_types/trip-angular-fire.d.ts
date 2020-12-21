@@ -1,3 +1,5 @@
+import { Comment } from '../_models/comment';
+
 interface TripAngularFire {
   key: string;
   rating: number;
@@ -11,6 +13,7 @@ interface TripAngularFire {
   currentPeopleCount: number;
   maxPeopleCount: number;
   photoUrl: string;
+  comments: Comment[];
 }
 
 export { TripAngularFire };

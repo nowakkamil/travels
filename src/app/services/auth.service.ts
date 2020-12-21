@@ -37,6 +37,11 @@ export class AuthService {
     return user.email;
   }
 
+  async getUserId(): Promise<string> {
+    const user = await this.getUserPromise();
+    return user.uid;
+  }
+
   getUserPromise(): Promise<firebase.User | null> {
     return this.firebaseAuth.authState.pipe(first()).toPromise();
   }

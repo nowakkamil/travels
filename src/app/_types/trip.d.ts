@@ -1,3 +1,5 @@
+import { Comment } from '../_models/comment';
+
 interface Trip {
   rating: number;
   id: number;
@@ -10,6 +12,7 @@ interface Trip {
   currentPeopleCount: number;
   maxPeopleCount: number;
   photoUrl: string;
+  comments: Comment[];
 }
 
 export { Trip };

@@ -5,6 +5,7 @@ import { Trip } from '../_models/trip';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { TripAngularFire } from '../_models/trip-angular-fire';
 import { map } from 'rxjs/operators';
+import { Comment } from '../_models/comment';
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +30,13 @@ export class TravelsService {
       ).subscribe(
         response => {
           const trips = Array.isArray(response)
-            ? response.map(trip => Trip.fromAngularInterface(trip))
-            : [Trip.fromAngularInterface(response)];
+            ? response.map(trip => {
+              const comments = trip.publicAccess
+                ? trip.publicAccess.comments
+                : [];
+              return Trip.fromAngularInterface(trip, comments);
+            })
+            : [Trip.fromAngularInterface(response, null)];
 
           this.trips = trips;
           this.unfilteredTrips = trips;
@@ -40,6 +46,10 @@ export class TravelsService {
 
   getAll(): Array<Trip> {
     return this.trips;
+  }
+
+  getByKey(key: string): Trip | undefined {
+    return this.trips.find(trip => trip.key === key);
   }
 
   getById(id: number): Trip | undefined {
@@ -111,6 +121,16 @@ export class TravelsService {
     this.tripsAngularFireList
       .remove(key)
       .catch(console.log);
+  }
+
+  updateComments(key: string, comment: Comment): Promise<void> {
+    const trip = this.getByKey(key);
+    const previousComments = trip.comments;
+    const updatedComments = (previousComments && Array.isArray(previousComments))
+      ? [...previousComments, comment]
+      : [comment];
+
+    return this.tripsAngularFireList.update(key + '/publicAccess', { comments: updatedComments });
   }
 
 }

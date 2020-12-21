@@ -1,5 +1,6 @@
 import { Trip as TripInterface } from '../_types/trip';
 import { TripAngularFire } from '../_types/trip-angular-fire';
+import { Comment } from '../_models/comment';
 
 class Trip implements TripInterface {
   static lastId = 0;
@@ -15,6 +16,7 @@ class Trip implements TripInterface {
   currentPeopleCount: number;
   maxPeopleCount: number;
   photoUrl: string;
+  comments: Comment[];
 
   key: string;
 
@@ -30,11 +32,12 @@ class Trip implements TripInterface {
     trip.rating = data.rating;
     trip.startDate = data.startDate;
     trip.endDate = data.endDate;
+    trip.comments = data.comments;
 
     return trip;
   }
 
-  static fromAngularInterface(data: TripAngularFire): Trip {
+  static fromAngularInterface(data: TripAngularFire, comments: Comment[]): Trip {
     const trip = new Trip(Trip.lastId + 1);
 
     trip.description = data.description;
@@ -47,6 +50,7 @@ class Trip implements TripInterface {
     trip.startDate = new Date(data.startDate);
     trip.endDate = new Date(data.endDate);
 
+    trip.comments = comments;
     trip.key = data.key;
 
     return trip;

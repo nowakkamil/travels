@@ -1,5 +1,6 @@
 import { TripAngularFire as TripAngularFireInterface } from '../_types/trip-angular-fire';
 import { TripInterface } from './trip';
+import { Comment } from '../_models/comment';
 
 class TripAngularFire implements TripAngularFireInterface {
   key: string;
@@ -14,6 +15,7 @@ class TripAngularFire implements TripAngularFireInterface {
   currentPeopleCount: number;
   maxPeopleCount: number;
   photoUrl: string;
+  comments: Comment[];
 
   static fromInterface(data: TripInterface): TripAngularFire {
     const trip = new TripAngularFire();
@@ -27,6 +29,7 @@ class TripAngularFire implements TripAngularFireInterface {
     trip.rating = data.rating;
     trip.startDate = new Date(data.startDate).getTime();
     trip.endDate = new Date(data.endDate).getTime();
+    trip.comments = data.comments;
 
     return trip;
   }
