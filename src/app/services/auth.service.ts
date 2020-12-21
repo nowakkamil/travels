@@ -24,6 +24,16 @@ export class AuthService {
     return environment.adminId === user.uid;
   }
 
+  async isLoggedIn(): Promise<boolean> {
+    const user = await this.getUserPromise();
+    return user ? true : false;
+  }
+
+  async getUserEmail(): Promise<string> {
+    const user = await this.getUserPromise();
+    return user.email;
+  }
+
   getUserPromise(): Promise<firebase.User | null> {
     return this.firebaseAuth.authState.pipe(first()).toPromise();
   }

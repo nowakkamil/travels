@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
 import { NzFormModule } from 'ng-zorro-antd/form';
 
+import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { IconsProviderModule } from './icons-provider.module';
@@ -95,6 +96,7 @@ registerLocaleData(en);
     NzDescriptionsModule,
     NzCommentModule,
     NzModalModule,
+    NzTagModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule

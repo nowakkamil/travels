@@ -21,7 +21,11 @@
       Shopping Cart
     </a>
   </li>
-  <li class="sign-out-item">
+  <li class="float-right">
+    <span>
+      Hello {{userName}}
+    </span>
+    <nz-tag [nzColor]="'geekblue'">{{isAdmin ? 'admin': 'user'}}</nz-tag>
     <button nz-button nzType="text" (click)="signOut()">
       <i nz-icon nzType="logout" nzTheme="outline"></i>
       Sign out
