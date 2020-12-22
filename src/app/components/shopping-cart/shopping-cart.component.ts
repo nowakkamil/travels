@@ -19,6 +19,10 @@ export class ShoppingCartComponent {
     return this.trips.reduce(this.accumulatePrice, 0);
   }
 
+  priceSummaryPerTrip(key: string): number {
+    return this.trips.filter(trip => trip.trip.key === key).reduce(this.accumulatePrice, 0);
+  }
+
   accumulatePrice(accumulated: number, entry: { trip: Trip; count: number; }): number {
     return accumulated + entry.trip.price * entry.count;
   }

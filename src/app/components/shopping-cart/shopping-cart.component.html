@@ -1,13 +1,26 @@
 <div class="main">
-  <h4>Selected trips</h4>
-  <div>
-    <ul>
-      <li *ngFor="let data of trips">
-        {{ data.trip.name }} - {{ data.count }}
-      </li>
-    </ul>
-  </div>
-  <div>
-    Price summary: {{ priceSummary | currency:'$' }}
-  </div>
+  <nz-table *ngIf="trips" #basicTable [nzData]="trips">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Count</th>
+        <th>Partial Sum</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.trip.name }}</td>
+        <td>{{ data.count }}</td>
+        <td>{{ priceSummaryPerTrip(data.trip.key) | currency:'$' }}</td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          Price summary
+        </td>
+        <td>
+          {{ priceSummary | currency:'$' }}
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
 </div>

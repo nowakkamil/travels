@@ -33,6 +33,8 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzCommentModule } from 'ng-zorro-antd/comment';
 import { NzListModule } from 'ng-zorro-antd/list';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { HttpClientModule } from '@angular/common/http';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
@@ -97,6 +99,8 @@ registerLocaleData(en);
     NzDescriptionsModule,
     NzCommentModule,
     NzListModule,
+    NzTableModule,
+    NzDividerModule,
     NzModalModule,
     NzTagModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
