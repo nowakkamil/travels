@@ -37,7 +37,9 @@ export class TripDetailsComponent implements OnInit {
       this.data = this.mapToUsername(this.trip.comments);
     });
     this.key = this.route.snapshot.paramMap.get('key');
-    this.trip = this.travelsService.getByKey(this.key);
+    this.travelsService.getAllPromise().subscribe(trips => {
+      this.trip = trips.find(trip => trip.key === this.key);
+    });
     this.photosUrls = Array(4)
       .fill(null)
       .map((_, index) => `https://picsum.photos/id/${Math.round(Math.random() * 20) + index}/400`);

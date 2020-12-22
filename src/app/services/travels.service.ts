@@ -1,6 +1,6 @@
 import { Filter } from 'src/app/_types/filter';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Trip } from '../_models/trip';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { TripAngularFire } from '../_models/trip-angular-fire';
@@ -22,30 +22,40 @@ export class TravelsService {
     this.populateTrips();
   }
 
-  populateTrips(): void {
+  populateTrips(): Observable<any[]> {
     this.tripsAngularFireList = this.db.list<TripAngularFire>('/trips');
-    this.tripsAngularFireList.snapshotChanges()
+
+    const promise = this.tripsAngularFireList
+      .snapshotChanges()
       .pipe(map(changes => changes.map(
         (c: { payload: { key: any; val: () => any; }; }) => ({ key: c.payload.key, ...c.payload.val() })))
-      ).subscribe(
-        response => {
-          const trips = Array.isArray(response)
-            ? response.map(trip => {
-              const comments = trip.publicAccess
-                ? trip.publicAccess.comments
-                : [];
-              return Trip.fromAngularInterface(trip, comments);
-            })
-            : [Trip.fromAngularInterface(response, null)];
+      );
 
-          this.trips = trips;
-          this.unfilteredTrips = trips;
-          this.emitFilterChange();
-        }, err => console.log(err));
+    promise.subscribe(
+      response => {
+        const trips = Array.isArray(response)
+          ? response.map(trip => {
+            const comments = trip.publicAccess
+              ? trip.publicAccess.comments
+              : [];
+            return Trip.fromAngularInterface(trip, comments);
+          })
+          : [Trip.fromAngularInterface(response, null)];
+
+        this.trips = trips;
+        this.unfilteredTrips = trips;
+        this.emitFilterChange();
+      }, err => console.log(err));
+
+    return promise;
   }
 
   getAll(): Array<Trip> {
     return this.trips;
+  }
+
+  getAllPromise(): Observable<any[]> {
+    return this.populateTrips();
   }
 
   getByKey(key: string): Trip | undefined {
