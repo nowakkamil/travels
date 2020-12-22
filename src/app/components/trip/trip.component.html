@@ -1,11 +1,11 @@
 <ng-container *ngIf="isHighest;else lowestPrice">
-  <nz-ribbon nzText="Highest price" nzColor="green">
+  <nz-ribbon nzText="Highest price" nzColor="geekblue">
     <ng-container *ngTemplateOutlet="card"></ng-container>
   </nz-ribbon>
 </ng-container>
 <ng-template #lowestPrice>
   <ng-container *ngIf="isLowest;else card">
-    <nz-ribbon nzText="Lowest price" nzColor="volcano">
+    <nz-ribbon nzText="Lowest price" nzColor="magenta">
       <ng-container *ngTemplateOutlet="card"></ng-container>
     </nz-ribbon>
   </ng-container>
