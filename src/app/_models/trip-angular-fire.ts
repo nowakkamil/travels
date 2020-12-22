@@ -29,7 +29,7 @@ class TripAngularFire implements TripAngularFireInterface {
     trip.rating = data.rating;
     trip.startDate = new Date(data.startDate).getTime();
     trip.endDate = new Date(data.endDate).getTime();
-    trip.comments = data.comments;
+    trip.comments = data.comments ? data.comments : [];
 
     return trip;
   }
