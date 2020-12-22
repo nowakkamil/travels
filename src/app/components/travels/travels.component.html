@@ -12,7 +12,7 @@
   <app-filter></app-filter>
   <div *ngIf="trips" class="travels">
     <div *ngFor="let trip of trips">
-      <app-trip [isAdmin]="isAdmin" [isHighest]="trip.id === minPriceId" [isLowest]="trip.id === maxPriceId"
+      <app-trip [isAdmin]="isAdmin" [isHighest]="trip.key === maxPriceKey" [isLowest]="trip.key ===minPriceKey"
         [trip]="trip" (rated)="onTripRated($event)" (removed)="onTripRemoved($event)"
         (reserved)="onTripReserved($event)" (unreserved)="onTripUnreserved($event)"></app-trip>
     </div>

@@ -52,10 +52,6 @@ export class TravelsService {
     return this.trips.find(trip => trip.key === key);
   }
 
-  getById(id: number): Trip | undefined {
-    return this.trips.find(trip => trip.id === id);
-  }
-
   create(trip: Trip): void {
     const newTrip = TripAngularFire.fromInterface(trip);
     this.tripsAngularFireList.push(newTrip)

@@ -8,7 +8,7 @@ export class ShoppingCartService {
   selectedTrips: Array<{ trip: Trip, count: number }> = [];
 
   select(trip: Trip): void {
-    const entry = this.selectedTrips.find(e => e.trip.id === trip.id);
+    const entry = this.selectedTrips.find(e => e.trip.key === trip.key);
 
     if (entry) {
       entry.count++;
@@ -21,14 +21,14 @@ export class ShoppingCartService {
   }
 
   unselect(trip: Trip): void {
-    const entry = this.selectedTrips.find(e => e.trip.id === trip.id);
+    const entry = this.selectedTrips.find(e => e.trip.key === trip.key);
 
     if (entry) {
       entry.count--;
     }
 
     if (entry.count === 0) {
-      this.selectedTrips = this.selectedTrips.filter(e => e.trip.id !== trip.id);
+      this.selectedTrips = this.selectedTrips.filter(e => e.trip.key !== trip.key);
     }
   }
 }

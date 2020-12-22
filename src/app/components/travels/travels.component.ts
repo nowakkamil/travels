@@ -34,12 +34,12 @@ export class TravelsComponent implements OnInit {
     return this.trips.reduce(this.accumulateTripsCount, 0);
   }
 
-  get maxPriceId(): number {
-    return this.trips.reduce(this.tripWithHigherPrice).id;
+  get maxPriceKey(): string {
+    return this.trips.reduce(this.tripWithHigherPrice).key;
   }
 
-  get minPriceId(): number {
-    return this.trips.reduce(this.tripWithLowerPrice).id;
+  get minPriceKey(): string {
+    return this.trips.reduce(this.tripWithLowerPrice).key;
   }
 
   accumulateTripsCount(accumulated: number, current: Trip): number {
@@ -58,16 +58,16 @@ export class TravelsComponent implements OnInit {
       : y;
   }
 
-  onTripReserved(id: number): void {
-    this.shoppingCartService.select(this.trips.find(trip => trip.id === id));
+  onTripReserved(key: string): void {
+    this.shoppingCartService.select(this.trips.find(trip => trip.key === key));
   }
 
-  onTripUnreserved(id: number): void {
-    this.shoppingCartService.unselect(this.trips.find(trip => trip.id === id));
+  onTripUnreserved(key: string): void {
+    this.shoppingCartService.unselect(this.trips.find(trip => trip.key === key));
   }
 
-  onTripRated(data: { id: number, rating: number }): void {
-    const entry = this.trips.find(trip => trip.id === data.id);
+  onTripRated(data: { key: string, rating: number }): void {
+    const entry = this.trips.find(trip => trip.key === data.key);
     entry?.setRating(data.rating);
   }
 

@@ -15,8 +15,8 @@ export class TripComponent {
 
   @Output() removed = new EventEmitter<string>();
   @Output() rated = new EventEmitter<{ key: string, rating: number }>();
-  @Output() reserved = new EventEmitter<number>();
-  @Output() unreserved = new EventEmitter<number>();
+  @Output() reserved = new EventEmitter<string>();
+  @Output() unreserved = new EventEmitter<string>();
 
   onTripRated(rating: number): void {
     const data = {
@@ -37,7 +37,7 @@ export class TripComponent {
     }
 
     this.trip.reserve();
-    this.reserved.emit(this.trip.id);
+    this.reserved.emit(this.trip.key);
   }
 
   onUndoReserveButtonClicked(): void {
@@ -46,6 +46,6 @@ export class TripComponent {
     }
 
     this.trip.undoReserve();
-    this.unreserved.emit(this.trip.id);
+    this.unreserved.emit(this.trip.key);
   }
 }
