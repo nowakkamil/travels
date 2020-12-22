@@ -1,12 +1,12 @@
 <app-trip-creation [isAdmin]="isAdmin" (saved)="onTripSaved($event)"></app-trip-creation>
 
-<mat-card *ngIf="trips"
-  [ngClass]="{ 'booked-count--high': bookedTripsCount >= 10, 'booked-count--low': bookedTripsCount < 10 }"
-  [ngStyle]="{'font-size': '1.4em'}">
-  <mat-card-header>
-    <mat-card-title>Booked trips: {{ bookedTripsCount }}</mat-card-title>
-  </mat-card-header>
-</mat-card>
+<div *ngIf="bookedTripsCount" class="booked-badge">
+  <span>
+    Booked:
+  </span>
+  <nz-badge nzStandalone [nzCount]="bookedTripsCount" [nzStyle]="{ backgroundColor: '#108ee9', color: 'white' }">
+  </nz-badge>
+</div>
 
 <div class="filter-and-travels">
   <app-filter></app-filter>
