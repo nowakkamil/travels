@@ -1,4 +1,4 @@
-import { inject, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { of } from 'rxjs';
@@ -33,6 +33,7 @@ const tripsFixture: Trip[] = [Trip.fromAngularInterface({ ...tripFixture }, comm
 
 describe('TravelsService', () => {
   let httpMock: HttpTestingController;
+  let service: TravelsService;
 
   const snapshotChangesResult = [{
     payload: {
@@ -75,9 +76,14 @@ describe('TravelsService', () => {
     }).compileComponents();
 
     httpMock = TestBed.inject(HttpTestingController);
+    service = TestBed.inject(TravelsService);
   });
 
-  it('#getAll', inject([TravelsService], (service: TravelsService) => {
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+
+  it('#getAllPromise', () => {
     const trips$ = service.getAllPromise();
     trips$.subscribe(trips => {
       const trip = Trip.fromAngularInterface(trips[0], trips[0].comments);
@@ -86,7 +92,7 @@ describe('TravelsService', () => {
 
       expect(trip).toEqual(expectedTrip);
     });
-  }));
+  });
 
   afterEach(() => {
     httpMock.verify();
