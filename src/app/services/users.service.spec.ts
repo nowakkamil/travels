@@ -39,7 +39,7 @@ describe('UsersService', () => {
       imports: [HttpClientTestingModule],
       providers: [
         UsersService,
-        { provide: AngularFireDatabase, useValue: angularFireSpy },
+        { provide: AngularFireDatabase, useValue: angularFireSpy }
       ]
     }).compileComponents();
 

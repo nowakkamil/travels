@@ -71,7 +71,7 @@ describe('TravelsService', () => {
       imports: [HttpClientTestingModule],
       providers: [
         TravelsService,
-        { provide: AngularFireDatabase, useValue: angularFireSpy },
+        { provide: AngularFireDatabase, useValue: angularFireSpy }
       ]
     }).compileComponents();
 
