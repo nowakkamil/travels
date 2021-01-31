@@ -38,7 +38,7 @@ export class TripDetailsComponent implements OnInit {
     this.key = this.route.snapshot.paramMap.get('key');
     this.travelsService.getAllPromise().subscribe(trips => {
       if (!this.key) {
-        console.error(`Can not attempt to find the trips based on invalid value of key: ${this.key}`);
+        console.error(`Can not attempt to find the trip based on invalid value of key: ${this.key}`);
         return;
       }
 
