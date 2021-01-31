@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
 
 import { TripCreationComponent } from './trip-creation.component';
 
@@ -8,9 +9,9 @@ describe('TripCreationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TripCreationComponent ]
-    })
-    .compileComponents();
+      declarations: [TripCreationComponent],
+      providers: [FormBuilder]
+    }).compileComponents();
   });
 
   beforeEach(() => {

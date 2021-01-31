@@ -34,7 +34,9 @@ export class TripDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.usersService.getAllPromise().subscribe(users => {
       this.users = users;
-      this.data = this.mapToUsername(this.trip.comments);
+      if (this.trip && this.trip.comments) {
+        this.data = this.mapToUsername(this.trip.comments);
+      }
     });
     this.key = this.route.snapshot.paramMap.get('key');
     this.travelsService.getAllPromise().subscribe(trips => {

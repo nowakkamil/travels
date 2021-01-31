@@ -29,10 +29,6 @@ export class UsersService {
         const users = Array.isArray(response)
           ? response.map(User.fromInterface)
           : [User.fromInterface(response)];
-
-        console.log(response);
-        console.log(users);
-
         this.users = users;
       }, err => console.log(err));
 

@@ -20,7 +20,7 @@ describe('AuthGuardService', () => {
   const listSpy = jasmine.createSpyObj({
     snapshotChanges: of(snapshotChangesResult)
   });
-  const authServiceSpy = jasmine.createSpyObj('AngularFireDatabase', {
+  const authServiceSpy = jasmine.createSpyObj({
     list: listSpy
   });
 

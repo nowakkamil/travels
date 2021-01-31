@@ -8,9 +8,8 @@ describe('TripRatingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TripRatingComponent ]
-    })
-    .compileComponents();
+      declarations: [TripRatingComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -21,5 +20,15 @@ describe('TripRatingComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should emit when setRating is called', () => {
+    const ratingNumber = 4;
+    spyOn(component.rated, 'emit');
+
+    fixture.componentInstance.setRating(ratingNumber);
+    fixture.detectChanges();
+
+    expect(component.rated.emit).toHaveBeenCalledWith(ratingNumber);
   });
 });
