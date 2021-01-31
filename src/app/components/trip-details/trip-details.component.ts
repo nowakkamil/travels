@@ -34,13 +34,24 @@ export class TripDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.usersService.getAllPromise().subscribe(users => {
       this.users = users;
-      if (this.trip && this.trip.comments) {
-        this.data = this.mapToUsername(this.trip.comments);
-      }
     });
     this.key = this.route.snapshot.paramMap.get('key');
     this.travelsService.getAllPromise().subscribe(trips => {
-      this.trip = trips.find(trip => trip.key === this.key);
+      if (!this.key) {
+        console.error(`Can not attempt to find the trips based on invalid value of key: ${this.key}`);
+        return;
+      }
+
+      const tripFromResponse = trips.find(trip => trip.key === this.key);
+      if (!tripFromResponse) {
+        console.error(`Couldn't find the trip of key: ${this.key}`);
+        return;
+      }
+
+      this.trip = tripFromResponse.publicAccess && tripFromResponse.publicAccess.comments
+        ? Trip.fromAngularInterface(tripFromResponse, tripFromResponse.publicAccess.comments)
+        : Trip.fromAngularInterface(tripFromResponse, []);
+      this.data = this.mapToUsername(this.trip.comments);
     });
     this.photosUrls = Array(4)
       .fill(null)
@@ -65,7 +76,7 @@ export class TripDetailsComponent implements OnInit {
       .updateComments(this.trip.key, newComment)
       .then(() => {
         this.submitting = false;
-        this.data = this.mapToUsername([...this.data, newComment]);
+        this.data = this.mapToUsername([...this.data]);
       });
   }
 

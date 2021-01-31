@@ -8,18 +8,40 @@ import { of } from 'rxjs';
 
 import { TripDetailsComponent } from './trip-details.component';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { Trip } from 'src/app/_models/trip';
 
 describe('TripDetailsComponent', () => {
   let component: TripDetailsComponent;
   let fixture: ComponentFixture<TripDetailsComponent>;
 
+  const tripFixture = {
+    key: 'a',
+    id: 4,
+    description: 'Finest trip description (1)',
+    destination: 'Country #1',
+    name: 'Name: \'1\'',
+    photoUrl: 'https://picsum.photos/id/10/448',
+    startDate: 1608412839805,
+    endDate: 1608412839805,
+    maxPeopleCount: 1,
+    currentPeopleCount: 0,
+    rating: 2,
+    price: 1199,
+    comments: null
+  };
+
+  const commentsFixture = [{
+    date: 1608412839805,
+    content: 'test content',
+    authorId: 'test authorId',
+    displayTime: 'test display',
+  }];
+
+  const tripsFixture: Trip[] = [Trip.fromAngularInterface({ ...tripFixture }, commentsFixture)];
+
   const snapshotChangesResult = [{
     payload: {
-      val: () => ({
-        key: 'test key',
-        email: 'test email',
-        userName: 'test username'
-      })
+      val: () => tripsFixture
     }
   }];
   const listSpy = jasmine.createSpyObj({
