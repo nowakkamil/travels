@@ -1,4 +1,3 @@
-import { User } from 'src/app/_models/user';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from 'src/app/services/auth.service';
@@ -52,7 +51,8 @@ describe('TripDetailsComponent', () => {
   });
 
   const authServiceSpy = jasmine.createSpyObj({
-    isLoggedIn: new Promise<boolean>(res => res(true))
+    isLoggedIn: new Promise<boolean>(res => res(true)),
+    getUserId: new Promise<string>(res => res('123'))
   });
 
   const usersFixture = [{
@@ -67,7 +67,8 @@ describe('TripDetailsComponent', () => {
 
   const travelsServiceMock = {
     getAll: [{}],
-    getAllPromise: () => of([{}])
+    getAllPromise: () => of([{}]),
+    updateComments: () => new Promise<void>(res => res())
   };
 
   beforeEach(async () => {
@@ -91,5 +92,10 @@ describe('TripDetailsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should properly handle submission of new comment', async () => {
+    component.trip = tripsFixture[0];
+    await expectAsync(component.handleSubmit()).toBeResolved();
   });
 });

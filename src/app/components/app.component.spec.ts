@@ -9,7 +9,8 @@ describe('AppComponent', () => {
   const authServiceSpy = jasmine.createSpyObj({
     isLoggedIn: new Promise<boolean>(res => res(true)),
     isAdmin: new Promise<boolean>(res => res(true)),
-    getUserEmail: new Promise<string>(res => res('test mail'))
+    getUserEmail: new Promise<string>(res => res('test mail')),
+    signOut: new Promise<void>(res => res())
   });
 
   beforeEach(async () => {
@@ -31,6 +32,13 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
+  });
+
+  it('should invoke method to sign out of the authentication service', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    app.signOut();
+    expect(authServiceSpy.signOut).toHaveBeenCalled();
   });
 
   it(`should have as title 'Travels'`, () => {
