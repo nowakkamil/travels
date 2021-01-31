@@ -26,7 +26,7 @@ const commentsFixture = [{
   date: 1608412839805,
   content: 'test content',
   authorId: 'test authorId',
-  displayTime: 'tes display',
+  displayTime: 'test display',
 }];
 
 const tripsFixture: Trip[] = [Trip.fromAngularInterface({ ...tripFixture }, commentsFixture)];
@@ -54,7 +54,7 @@ describe('TravelsService', () => {
           date: 1608412839805,
           content: 'test content',
           authorId: 'test authorId',
-          displayTime: 'tes display',
+          displayTime: 'test display',
         }]
       })
     }
