@@ -60,7 +60,8 @@ describe('TravelsService', () => {
     }
   }];
   const listSpy = jasmine.createSpyObj({
-    snapshotChanges: of(snapshotChangesResult)
+    snapshotChanges: of(snapshotChangesResult),
+    push: new Promise<Array<Trip>>(res => res([]))
   });
   const angularFireSpy = jasmine.createSpyObj('AngularFireDatabase', {
     list: listSpy
@@ -92,6 +93,14 @@ describe('TravelsService', () => {
 
       expect(trip).toEqual(expectedTrip);
     });
+  });
+
+  it('#create', () => {
+    const trip = Trip.fromAngularInterface(tripFixture, []);
+    trip.id = Trip.lastId - 1;
+    service.create(trip);
+    const trips = service.getAll();
+    expect(trips).toContain(jasmine.objectContaining(trip));
   });
 
   afterEach(() => {

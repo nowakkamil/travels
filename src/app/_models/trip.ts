@@ -20,23 +20,6 @@ class Trip implements TripInterface {
 
   key: string;
 
-  static fromInterface(data: TripInterface): Trip {
-    const trip = new Trip(Trip.lastId + 1);
-
-    trip.description = data.description;
-    trip.destination = data.destination;
-    trip.maxPeopleCount = data.maxPeopleCount;
-    trip.name = data.name;
-    trip.photoUrl = data.photoUrl;
-    trip.price = data.price;
-    trip.rating = data.rating;
-    trip.startDate = data.startDate;
-    trip.endDate = data.endDate;
-    trip.comments = data.comments;
-
-    return trip;
-  }
-
   static fromAngularInterface(data: TripAngularFire, comments: Comment[]): Trip {
     const trip = new Trip(Trip.lastId + 1);
 
